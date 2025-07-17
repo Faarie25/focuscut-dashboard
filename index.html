@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- REVISI: Judul tab browser diubah -->
     <title>FocusCut</title>
     
     <!-- External Libraries & Fonts -->
@@ -18,7 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <script src="https://cdn.jsdelivr.net/npm/date-fns"></script>
     
-    <!-- Firebase Libraries (Compat Version - Sesuai Permintaan) -->
+    <!-- Firebase Libraries (Compat Version) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -67,12 +66,10 @@
 </head>
 <body class="text-white">
 
-    <!-- Login Screen -->
+    <!-- Login Screen (TIDAK DIUBAH) -->
     <div id="login-screen" class="min-h-screen flex items-center justify-center p-4">
         <div class="glass-panel rounded-2xl p-8 text-center max-w-md w-full">
-            <!-- REVISI: Logo diubah menjadi gambar lingkaran -->
             <img src="https://i.imgur.com/2z2b0so.jpeg" alt="FocusCut Logo" class="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-white/20">
-            <!-- REVISI: Judul produk diubah -->
             <h1 class="text-3xl font-bold text-white mb-2">FocusCut</h1>
             <p class="text-gray-300 mb-6">Masuk untuk melanjutkan ke dasbor Anda.</p>
             <div id="login-error-message" class="hidden text-left text-sm bg-red-900/50 text-red-300 p-3 rounded-lg mb-4"></div>
@@ -80,12 +77,11 @@
                 <svg class="w-6 h-6" viewBox="0 0 48 48"><path fill="#4285F4" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#34A853" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l5.657,5.657C40.074,36.938,44,31.016,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FBBC05" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#EA4335" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="none" d="M6,13.5l6,5l6-5L12,2z"></path></svg>
                 <span>Masuk dengan Google</span>
             </button>
-            <!-- REVISI: Watermark dan versi produk diubah -->
             <p class="text-xs text-gray-500 mt-8">FocusCut Version 0.2</p>
         </div>
     </div>
 
-    <!-- Main Application Screen (initially hidden) -->
+    <!-- Main Application Screen -->
     <div id="app-screen" class="hidden p-4 sm:p-6 lg:p-8 min-h-screen flex-col pb-24">
         <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 pb-4 border-b border-white/10">
             <div class="flex items-center gap-4">
@@ -173,7 +169,6 @@
     <div id="comments-panel-overlay" class="fixed inset-0 bg-black bg-opacity-70 hidden z-40"></div>
     <div id="comments-panel" class="side-panel glass-panel fixed top-0 right-0 h-full w-full max-w-md shadow-2xl transform translate-x-full z-50 flex flex-col"><div class="flex justify-between items-center p-4 border-b border-white/10 flex-shrink-0"><h3 id="comments-task-title" class="text-lg font-bold text-white truncate pr-4">Komentar</h3><button id="close-comments-btn" class="p-2 text-gray-400 hover:text-white"><i class="ph-bold ph-x text-xl"></i></button></div><div id="comments-list" class="flex-grow p-4 overflow-y-auto custom-scrollbar"></div><div class="p-4 border-t border-white/10 flex-shrink-0"><form id="comment-form" class="flex gap-2"><input type="text" id="comment-input" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Tulis komentar..." required><button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-lg flex items-center justify-center"><i class="ph-bold ph-paper-plane-tilt text-xl"></i></button></form></div></div>
     <div id="focus-bar" class="fixed bottom-0 left-0 right-0 glass-panel shadow-lg"><div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-2 grid grid-cols-2 md:grid-cols-3 items-center gap-4"><div class="flex items-center gap-3 justify-start"><i class="ph-bold ph-timer text-xl text-yellow-400"></i><span class="font-semibold text-white hidden sm:inline">Editor Focus</span><span id="timer-display" class="text-lg font-mono bg-slate-900/70 text-white px-2 py-0.5 rounded-md">30:00</span></div><div class="hidden md:flex flex-col items-center justify-center"><div class="w-full max-w-xs bg-slate-600/50 rounded-full h-2.5"><div id="timer-progress" class="bg-yellow-400 h-2.5 rounded-full" style="width: 100%;"></div></div></div><div class="flex items-center gap-4 justify-end">
-        <!-- REVISI: Watermark di footer diubah -->
         <div class="text-xs text-gray-500 hidden lg:block">FocusCut Version 0.2</div>
         <div class="flex items-center gap-2"><button id="start-timer-btn" class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition-colors"><i class="ph-bold ph-play"></i></button><button id="pause-timer-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full transition-colors hidden"><i class="ph-bold ph-pause"></i></button><button id="reset-timer-btn" class="bg-red-600 hover:bg-red-700 text-white p-2 rounded-full transition-colors"><i class="ph-bold ph-arrow-counter-clockwise"></i></button></div></div></div></div>
 
@@ -200,7 +195,7 @@
         let currentUser = null;
         let userProfileData = {};
         let allTasksCache = [];
-        let allAssetsCache = [];
+        let allAssetsCache = []; // Cache untuk semua aset
         let unsubscribeComments = null;
         let completedTasksChart = null;
         let artistDistributionChart = null;
@@ -305,13 +300,15 @@
             setupCommentSubmission(user, profileData);
             setupInvoiceGenerator(user, profileData); 
             setupTimer();
-            setupSearchAndSort();
+            setupTaskSearchAndSort();
+            // REVISI: Panggil fungsi setup untuk search aset
+            setupAssetSearch();
             listenToTasks(user.uid);
             listenToAssets(user.uid);
         }
         
-        // --- FUNGSI SEARCH & SORT ---
-        function setupSearchAndSort() {
+        // --- FUNGSI SEARCH & SORT PROYEK ---
+        function setupTaskSearchAndSort() {
             const taskSearchInput = document.getElementById('task-search-input');
             const taskSortSelect = document.getElementById('task-sort-select');
             taskSearchInput.addEventListener('input', filterAndSortTasks);
@@ -342,6 +339,34 @@
                 }
             });
             renderAllTasks(processedTasks);
+        }
+
+        // --- REVISI: FUNGSI BARU UNTUK SEARCH ASET ---
+        function setupAssetSearch() {
+            const assetSearchInput = document.getElementById('asset-search-input');
+            assetSearchInput.addEventListener('input', filterAssets);
+        }
+
+        function filterAssets() {
+            const assetSearchInput = document.getElementById('asset-search-input');
+            const searchTerm = assetSearchInput.value.toLowerCase();
+
+            // Filter dari cache `allAssetsCache`
+            const filteredAssets = allAssetsCache.filter(asset => {
+                if (!searchTerm) return true; // Tampilkan semua jika search kosong
+
+                const clientName = asset.clientName?.toLowerCase() || '';
+                const projectType = asset.projectType?.toLowerCase() || '';
+                const tags = (asset.tags || []).join(' ').toLowerCase(); // Gabungkan tag jadi satu string
+
+                // Cek apakah search term ada di salah satu field
+                return clientName.includes(searchTerm) ||
+                       projectType.includes(searchTerm) ||
+                       tags.includes(searchTerm);
+            });
+
+            // Render hasil filter
+            renderAllAssets(filteredAssets);
         }
 
         // --- FUNGSI `listenToTasks` ---
@@ -383,8 +408,6 @@
             const addItemBtn = document.getElementById('add-invoice-item-btn');
             const previewContainer = document.getElementById('invoice-preview');
             const saveSettingsBtn = document.getElementById('save-invoice-settings-btn');
-            const logoUploadContainer = document.querySelector('label[for="invoice-company-logo"]');
-            if(logoUploadContainer) logoUploadContainer.parentElement.remove();
             const bankNameInput = document.getElementById('invoice-bank-name');
             const accountNameInput = document.getElementById('invoice-account-name');
             const accountNumberInput = document.getElementById('invoice-account-number');
@@ -562,11 +585,16 @@
             document.getElementById('cancel-delete-btn').onclick = () => closeModal(deleteConfirmModal);
             openModal(deleteConfirmModal);
         }
-        function renderAllAssets(assets) {
-            allAssetsCache = assets;
+        
+        // REVISI: Fungsi `renderAllAssets` diubah untuk menerima parameter
+        function renderAllAssets(assetsToRender) {
             const grid = document.getElementById('assets-grid');
-            grid.innerHTML = '';
-            assets.forEach(asset => {
+            grid.innerHTML = ''; // Kosongkan grid sebelum render ulang
+            if (assetsToRender.length === 0) {
+                grid.innerHTML = `<p class="text-center text-gray-400 col-span-full mt-8">Aset tidak ditemukan.</p>`;
+                return;
+            }
+            assetsToRender.forEach(asset => {
                 const assetCard = document.createElement('a');
                 assetCard.href = asset.fileLink;
                 assetCard.target = "_blank";
@@ -575,7 +603,17 @@
                 grid.appendChild(assetCard);
             });
         }
-        function listenToAssets(uid) { db.collection('assets').where('ownerId', '==', uid).onSnapshot(snapshot => { const assets = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })); renderAllAssets(assets); }, error => console.error("Error mendengarkan perubahan aset:", error)); }
+        
+        // REVISI: Fungsi `listenToAssets` diubah untuk memanggil fungsi filter
+        function listenToAssets(uid) {
+            db.collection('assets').where('ownerId', '==', uid).onSnapshot(snapshot => {
+                // Simpan data mentah ke cache
+                allAssetsCache = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                // Panggil fungsi filter untuk menampilkan data awal
+                filterAssets();
+            }, error => console.error("Error mendengarkan perubahan aset:", error));
+        }
+
         function updateAnalytics(tasks) {
             const doneTasks = tasks.filter(task => task.status === 'done' && task.completedAt);
             const now = new Date();
@@ -604,7 +642,6 @@
             const resetTimerBtn = document.getElementById('reset-timer-btn');
             const okTimerAlertBtn = document.getElementById('ok-timer-alert-btn');
             const timerAlertModal = document.getElementById('timer-alert-modal');
-            const ORIGINAL_TITLE = document.title;
             let timerInterval = null;
             const FOCUS_TIME = 30 * 60;
             let remainingSeconds = FOCUS_TIME;
