@@ -71,11 +71,11 @@
         <div class="glass-panel rounded-2xl p-8 text-center max-w-md w-full">
             <img src="https://i.imgur.com/2z2b0so.jpeg" alt="FocusCut Logo" class="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-white/20">
             <h1 class="text-3xl font-bold text-white mb-2">FocusCut</h1>
-            <p class="text-gray-300 mb-6">Masuk untuk melanjutkan ke dasbor Anda.</p>
+            <p class="text-gray-300 mb-6" data-lang-key="login_prompt">Masuk untuk melanjutkan ke dasbor Anda.</p>
             <div id="login-error-message" class="hidden text-left text-sm bg-red-900/50 text-red-300 p-3 rounded-lg mb-4"></div>
             <button id="google-login-btn" class="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-200 text-gray-800 font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-300">
                 <svg class="w-6 h-6" viewBox="0 0 48 48"><path fill="#4285F4" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#34A853" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l5.657,5.657C40.074,36.938,44,31.016,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FBBC05" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#EA4335" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="none" d="M6,13.5l6,5l6-5L12,2z"></path></svg>
-                <span>Masuk dengan Google</span>
+                <span data-lang-key="login_button">Masuk dengan Google</span>
             </button>
             <p class="text-xs text-gray-500 mt-8">FocusCut Version 0.2</p>
         </div>
@@ -95,80 +95,122 @@
                 <input type="file" id="profile-pic-input" class="hidden" accept="image/*">
                 <div>
                     <h1 id="company-name-display" class="text-xl sm:text-2xl font-bold text-white">Nama Perusahaan</h1>
-                    <p id="user-info" class="text-sm text-gray-300">Login sebagai: <span id="user-name-display"></span></p>
+                    <p id="user-info" class="text-sm text-gray-300 flex items-center gap-2">
+                        <span data-lang-key="logged_in_as">Login sebagai:</span>
+                        <span id="user-name-display"></span>
+                        <button id="edit-profile-btn" class="text-gray-400 hover:text-white" title="Edit Nama Profil"><i class="ph ph-pencil-simple"></i></button>
+                    </p>
                 </div>
             </div>
             <div class="flex items-center gap-4 mt-4 sm:mt-0 w-full sm:w-auto justify-end">
-                <label for="bg-upload-input" class="cursor-pointer bg-slate-700/50 hover:bg-slate-600/50 text-white p-2 rounded-full transition-colors" title="Ganti Latar Belakang"><i class="ph-bold ph-image"></i></label>
+                <button id="language-switcher-btn" class="bg-slate-700/50 hover:bg-slate-600/50 text-white p-2 rounded-full transition-colors" title="Ganti Bahasa">
+                    <span id="language-flag">🇮🇩</span>
+                </button>
+                <label for="bg-upload-input" class="cursor-pointer bg-slate-700/50 hover:bg-slate-600/50 text-white p-2 rounded-full transition-colors" data-lang-title="change_bg_title"><i class="ph-bold ph-image"></i></label>
                 <input type="file" id="bg-upload-input" class="hidden" accept="image/*">
                 <div id="presence-indicators" class="flex items-center -space-x-2"></div>
-                <button id="logout-btn" class="bg-red-600/80 hover:bg-red-700/80 text-white p-2 rounded-full transition-colors" title="Keluar"><i class="ph-bold ph-sign-out"></i></button>
+                <button id="logout-btn" class="bg-red-600/80 hover:bg-red-700/80 text-white p-2 rounded-full transition-colors" data-lang-title="logout_title"><i class="ph-bold ph-sign-out"></i></button>
                 <div id="main-actions">
-                    <button id="add-task-btn" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300"><i class="ph-bold ph-plus-circle text-xl"></i><span>Tambah Proyek</span></button>
-                    <button id="add-asset-btn" class="hidden items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300"><i class="ph-bold ph-archive text-xl"></i><span>Tambah Aset</span></button>
+                    <button id="add-task-btn" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300"><i class="ph-bold ph-plus-circle text-xl"></i><span data-lang-key="add_project_btn">Tambah Proyek</span></button>
+                    <button id="add-asset-btn" class="hidden items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300"><i class="ph-bold ph-archive text-xl"></i><span data-lang-key="add_asset_btn">Tambah Aset</span></button>
                 </div>
             </div>
         </header>
 
         <nav class="flex space-x-2 mb-6 overflow-x-auto custom-scrollbar pb-2">
-            <button id="nav-kanban" data-view="kanban-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-columns mr-1"></i> Papan Proyek</button>
-            <button id="nav-assets" data-view="assets-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-database mr-1"></i> Bank Konten</button>
-            <button id="nav-invoice" data-view="invoice-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-receipt mr-1"></i> Invoice</button>
-            <button id="nav-analytics" data-view="analytics-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-chart-bar mr-1"></i> Analitik</button>
+            <button id="nav-kanban" data-view="kanban-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-columns mr-1"></i> <span data-lang-key="nav_kanban">Papan Proyek</span></button>
+            <button id="nav-assets" data-view="assets-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-database mr-1"></i> <span data-lang-key="nav_assets">Bank Konten</span></button>
+            <button id="nav-invoice" data-view="invoice-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-receipt mr-1"></i> <span data-lang-key="nav_invoice">Invoice</span></button>
+            <button id="nav-analytics" data-view="analytics-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-chart-bar mr-1"></i> <span data-lang-key="nav_analytics">Analitik</span></button>
         </nav>
 
         <div class="flex-grow flex flex-col">
             <main id="kanban-view" class="main-view flex flex-col flex-grow">
                  <div class="flex flex-col md:flex-row gap-4 mb-6">
-                    <div class="relative flex-grow"><input type="text" id="task-search-input" placeholder="Cari nama klien, proyek, atau tanggal (YYYY-MM-DD)..." class="w-full bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i></div>
+                    <div class="relative flex-grow"><input type="text" id="task-search-input" data-lang-placeholder="search_placeholder" class="w-full bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i></div>
                     <div class="relative"><select id="task-sort-select" class="w-full md:w-auto appearance-none bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg pl-4 pr-10 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
-                        <option value="date_desc">Urutkan: Tanggal (Terbaru)</option>
-                        <option value="date_asc">Urutkan: Tanggal (Terlama)</option>
-                        <option value="name_az">Urutkan: Nama Klien (A-Z)</option>
-                        <option value="name_za">Urutkan: Nama Klien (Z-A)</option>
+                        <option value="date_desc" data-lang-key="sort_date_desc">Urutkan: Tanggal (Terbaru)</option>
+                        <option value="date_asc" data-lang-key="sort_date_asc">Urutkan: Tanggal (Terlama)</option>
+                        <option value="name_az" data-lang-key="sort_name_az">Urutkan: Nama Klien (A-Z)</option>
+                        <option value="name_za" data-lang-key="sort_name_za">Urutkan: Nama Klien (Z-A)</option>
                     </select><i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i></div>
                 </div>
                 <div class="flex-grow kanban-scroll-container">
                     <button id="scroll-left-btn" class="scroll-btn"><i class="ph-bold ph-caret-left text-2xl"></i></button>
                     <div id="kanban-scroll-wrapper" class="kanban-scroll-wrapper custom-scrollbar">
                         <div id="kanban-board" class="flex flex-row gap-6 pb-4 min-w-max">
-                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-cyan-300"><span><i class="ph-fill ph-list-bullets mr-2"></i>List Konten</span><span id="todo-count" class="bg-cyan-800 text-cyan-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="todo-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="todo"></div></div>
-                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-amber-300"><span><i class="ph-fill ph-person-simple-run mr-2"></i>Proses Editing</span><span id="wip-count" class="bg-amber-800 text-amber-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="wip-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="wip"></div></div>
-                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-purple-300"><span><i class="ph-fill ph-eye mr-2"></i>Review / Revisi</span><span id="review-count" class="bg-purple-800 text-purple-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="review-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="review"></div></div>
-                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-emerald-300"><span><i class="ph-fill ph-check-circle mr-2"></i>Selesai</span><span id="done-count" class="bg-emerald-800 text-emerald-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="done-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="done"></div></div>
+                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-cyan-300"><span><i class="ph-fill ph-list-bullets mr-2"></i><span data-lang-key="kanban_todo">List Konten</span></span><span id="todo-count" class="bg-cyan-800 text-cyan-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="todo-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="todo"></div></div>
+                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-amber-300"><span><i class="ph-fill ph-person-simple-run mr-2"></i><span data-lang-key="kanban_wip">Proses Editing</span></span><span id="wip-count" class="bg-amber-800 text-amber-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="wip-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="wip"></div></div>
+                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-purple-300"><span><i class="ph-fill ph-eye mr-2"></i><span data-lang-key="kanban_review">Review / Revisi</span></span><span id="review-count" class="bg-purple-800 text-purple-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="review-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="review"></div></div>
+                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-emerald-300"><span><i class="ph-fill ph-check-circle mr-2"></i><span data-lang-key="kanban_done">Selesai</span></span><span id="done-count" class="bg-emerald-800 text-emerald-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="done-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="done"></div></div>
                         </div>
                     </div>
                     <button id="scroll-right-btn" class="scroll-btn"><i class="ph-bold ph-caret-right text-2xl"></i></button>
                 </div>
             </main>
-            <main id="assets-view" class="main-view hidden flex-grow flex-col"><div class="mb-4 flex flex-col sm:flex-row gap-4"><div class="relative flex-grow"><input type="text" id="asset-search-input" placeholder="Cari berdasarkan klien, proyek, atau tag..." class="w-full bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white focus:ring-2 focus:ring-teal-500 outline-none"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i></div></div><div id="assets-grid" class="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-y-auto custom-scrollbar pr-2"></div></main>
+            <main id="assets-view" class="main-view hidden flex-grow flex-col"><div class="mb-4 flex flex-col sm:flex-row gap-4"><div class="relative flex-grow"><input type="text" id="asset-search-input" data-lang-placeholder="asset_search_placeholder" class="w-full bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white focus:ring-2 focus:ring-teal-500 outline-none"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i></div></div><div id="assets-grid" class="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-y-auto custom-scrollbar pr-2"></div></main>
             <main id="invoice-view" class="main-view hidden flex-grow flex-col">
                 <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
                     <div class="lg:col-span-2">
                         <form id="invoice-form" class="glass-panel rounded-xl p-6 space-y-4">
-                            <h3 class="text-xl font-bold text-white border-b border-white/10 pb-3">Buat Invoice</h3>
-                            <div class="space-y-2"><h4 class="text-md font-semibold text-gray-300">Informasi Klien</h4><div><label for="invoice-client-name" class="block text-sm font-medium text-gray-400">Nama Klien</label><input type="text" id="invoice-client-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="invoice-client-email" class="block text-sm font-medium text-gray-400">Email Klien</label><input type="email" id="invoice-client-email" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="invoice-due-date" class="block text-sm font-medium text-gray-400">Tanggal Jatuh Tempo</label><input type="date" id="invoice-due-date" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div></div>
-                            <div class="space-y-2 pt-4 border-t border-white/10"><h4 class="text-md font-semibold text-gray-300">Item Tagihan</h4><div id="invoice-items-container" class="space-y-2"></div><button type="button" id="add-invoice-item-btn" class="w-full text-sm bg-slate-600/50 hover:bg-slate-500/50 py-2 rounded-lg">+ Tambah Item</button></div>
-                            <div class="space-y-2 pt-4 border-t border-white/10"><h4 class="text-md font-semibold text-gray-300">Informasi Pembayaran</h4><div><label for="invoice-bank-name" class="block text-sm font-medium text-gray-400">Nama Bank</label><select id="invoice-bank-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"><option value="BCA">BCA (Bank Central Asia)</option><option value="Mandiri">Mandiri</option><option value="BRI">BRI (Bank Rakyat Indonesia)</option><option value="BNI">BNI (Bank Negara Indonesia)</option><option value="CIMB">CIMB Niaga</option><option value="Permata">Bank Permata</option><option value="Lainnya">Lainnya</option></select></div><div><label for="invoice-account-name" class="block text-sm font-medium text-gray-400">Nama Pemilik Rekening</label><input type="text" id="invoice-account-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="invoice-account-number" class="block text-sm font-medium text-gray-400">Nomor Rekening</label><input type="text" id="invoice-account-number" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div></div>
-                            <div class="pt-4 border-t border-white/10 flex justify-end gap-2"><button type="button" id="save-invoice-settings-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg" title="Simpan Info Bank">Simpan Info Bank</button><button type="button" id="export-pdf-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg">Export PDF</button></div>
+                            <h3 class="text-xl font-bold text-white border-b border-white/10 pb-3" data-lang-key="invoice_create_title">Buat Invoice</h3>
+                            <div class="space-y-2"><h4 class="text-md font-semibold text-gray-300" data-lang-key="invoice_client_info">Informasi Klien</h4><div><label for="invoice-client-name" class="block text-sm font-medium text-gray-400" data-lang-key="client_name_label">Nama Klien</label><input type="text" id="invoice-client-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="invoice-client-email" class="block text-sm font-medium text-gray-400" data-lang-key="invoice_client_email">Email Klien</label><input type="email" id="invoice-client-email" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="invoice-due-date" class="block text-sm font-medium text-gray-400" data-lang-key="invoice_due_date">Tanggal Jatuh Tempo</label><input type="date" id="invoice-due-date" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div></div>
+                            <div class="space-y-2 pt-4 border-t border-white/10"><h4 class="text-md font-semibold text-gray-300" data-lang-key="invoice_items">Item Tagihan</h4><div id="invoice-items-container" class="space-y-2"></div><button type="button" id="add-invoice-item-btn" class="w-full text-sm bg-slate-600/50 hover:bg-slate-500/50 py-2 rounded-lg" data-lang-key="invoice_add_item">+ Tambah Item</button></div>
+                            <div class="space-y-2 pt-4 border-t border-white/10"><h4 class="text-md font-semibold text-gray-300" data-lang-key="invoice_payment_info">Informasi Pembayaran</h4><div><label for="invoice-bank-name" class="block text-sm font-medium text-gray-400" data-lang-key="invoice_bank_name">Nama Bank</label><select id="invoice-bank-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"><option value="BCA">BCA (Bank Central Asia)</option><option value="Mandiri">Mandiri</option><option value="BRI">BRI (Bank Rakyat Indonesia)</option><option value="BNI">BNI (Bank Negara Indonesia)</option><option value="CIMB">CIMB Niaga</option><option value="Permata">Bank Permata</option><option value="Lainnya">Lainnya</option></select></div><div><label for="invoice-account-name" class="block text-sm font-medium text-gray-400" data-lang-key="invoice_account_name">Nama Pemilik Rekening</label><input type="text" id="invoice-account-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="invoice-account-number" class="block text-sm font-medium text-gray-400" data-lang-key="invoice_account_number">Nomor Rekening</label><input type="text" id="invoice-account-number" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div></div>
+                            <div class="pt-4 border-t border-white/10 flex justify-end gap-2"><button type="button" id="save-invoice-settings-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg" data-lang-key="invoice_save_bank_info" data-lang-title="invoice_save_bank_info_title">Simpan Info Bank</button><button type="button" id="export-pdf-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg" data-lang-key="invoice_export_pdf">Export PDF</button></div>
                         </form>
                     </div>
                     <div class="lg:col-span-3"><div id="invoice-preview-wrapper" class="bg-white text-gray-800 p-2 sm:p-4 rounded-lg shadow-2xl"><div id="invoice-preview" class="p-4 sm:p-8"></div></div></div>
                 </div>
             </main>
-            <main id="analytics-view" class="main-view hidden flex-grow flex-col"><div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6"><div class="glass-panel p-4 rounded-xl text-center"><h3 class="text-lg font-semibold text-gray-300">Total Proyek Selesai</h3><p id="analytics-total-done" class="text-4xl font-bold text-emerald-400 mt-2">0</p></div><div class="glass-panel p-4 rounded-xl text-center"><h3 class="text-lg font-semibold text-gray-300">Proyek Bulan Ini</h3><p id="analytics-this-month" class="text-4xl font-bold text-cyan-400 mt-2">0</p></div><div class="glass-panel p-4 rounded-xl text-center"><h3 class="text-lg font-semibold text-gray-300">Rata-rata Waktu Pengerjaan</h3><p id="analytics-avg-time" class="text-4xl font-bold text-amber-400 mt-2">N/A</p></div></div><div class="grid grid-cols-1 xl:grid-cols-2 gap-6"><div class="glass-panel p-4 rounded-xl"><h3 class="text-lg font-semibold text-white mb-4">Proyek Selesai per Minggu</h3><canvas id="completed-tasks-chart"></canvas></div><div class="glass-panel p-4 rounded-xl"><h3 class="text-lg font-semibold text-white mb-4">Distribusi Konten per Klien</h3><canvas id="artist-distribution-chart"></canvas></div></div></main>
+            <main id="analytics-view" class="main-view hidden flex-grow flex-col"><div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6"><div class="glass-panel p-4 rounded-xl text-center"><h3 class="text-lg font-semibold text-gray-300" data-lang-key="analytics_total_done">Total Proyek Selesai</h3><p id="analytics-total-done" class="text-4xl font-bold text-emerald-400 mt-2">0</p></div><div class="glass-panel p-4 rounded-xl text-center"><h3 class="text-lg font-semibold text-gray-300" data-lang-key="analytics_this_month">Proyek Bulan Ini</h3><p id="analytics-this-month" class="text-4xl font-bold text-cyan-400 mt-2">0</p></div><div class="glass-panel p-4 rounded-xl text-center"><h3 class="text-lg font-semibold text-gray-300" data-lang-key="analytics_avg_time">Rata-rata Waktu Pengerjaan</h3><p id="analytics-avg-time" class="text-4xl font-bold text-amber-400 mt-2">N/A</p></div></div><div class="grid grid-cols-1 xl:grid-cols-2 gap-6"><div class="glass-panel p-4 rounded-xl"><h3 class="text-lg font-semibold text-white mb-4" data-lang-key="analytics_completed_weekly">Proyek Selesai per Minggu</h3><canvas id="completed-tasks-chart"></canvas></div><div class="glass-panel p-4 rounded-xl"><h3 class="text-lg font-semibold text-white mb-4" data-lang-key="analytics_client_dist">Distribusi Konten per Klien</h3><canvas id="artist-distribution-chart"></canvas></div></div></main>
         </div>
     </div>
     
     <!-- Modals & Panels -->
-    <div id="onboarding-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0"><form id="onboarding-form"><h3 class="text-2xl font-bold mb-2 text-white">Selamat Datang!</h3><p class="text-gray-300 mb-6">Lengkapi profil Anda untuk mulai.</p><div class="space-y-4"><div><label for="profile-company-name" class="block text-sm font-medium text-gray-300">Nama Perusahaan/Komunitas</label><input type="text" id="profile-company-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="profile-field" class="block text-sm font-medium text-gray-300">Bergerak di Bidang</label><input type="text" id="profile-field" placeholder="cth: Video Editor, Agensi Kreatif" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="profile-contact" class="block text-sm font-medium text-gray-300">Kontak (Email/No. HP)</label><input type="text" id="profile-contact" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div></div><div class="flex justify-end gap-4 mt-8"><button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg flex items-center gap-2"><span>Simpan & Lanjutkan</span><div id="onboarding-loader" class="loader hidden"></div></button></div></form></div></div>
-    <div id="task-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0"><form id="task-form"><input type="hidden" id="task-id"><h3 id="task-modal-title" class="text-2xl font-bold mb-6">Tambah Proyek Baru</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4"><div><label for="task-client-name" class="block text-sm font-medium text-gray-300 mb-1">Nama Klien</label><input type="text" id="task-client-name" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="task-project-type" class="block text-sm font-medium text-gray-300 mb-1">Jenis Proyek</label><input type="text" id="task-project-type" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="task-priority" class="block text-sm font-medium text-gray-300 mb-1">Prioritas</label><select id="task-priority" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"><option value="biasa">Biasa</option><option value="penting">Penting</option><option value="mendesak">Mendesak</option></select></div><div><label for="task-deadline" class="block text-sm font-medium text-gray-300 mb-1">Deadline</label><input type="date" id="task-deadline" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div class="sm:col-span-2"><label for="task-contact" class="block text-sm font-medium text-gray-300 mb-1">Kontak Klien</label><input type="text" id="task-contact" placeholder="Email atau No. HP" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div></div><div class="mb-6"><label for="brief" class="block text-sm font-medium text-gray-300 mb-1">Brief / Catatan</label><textarea id="brief" rows="3" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></textarea></div><div class="flex justify-end gap-4"><button type="button" id="cancel-task-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-lg">Batal</button><button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg">Simpan</button></div></form></div></div>
-    <div id="asset-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0"><form id="asset-form"><input type="hidden" id="asset-id"><h3 id="asset-modal-title" class="text-2xl font-bold mb-6">Tambah Aset Baru</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4"><div class="sm:col-span-2"><label for="asset-file-link" class="block text-sm font-medium text-gray-300 mb-1">Link Google Drive</label><input type="url" id="asset-file-link" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="asset-client-name" class="block text-sm font-medium text-gray-300 mb-1">Nama Klien</label><input type="text" id="asset-client-name" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="asset-project-type" class="block text-sm font-medium text-gray-300 mb-1">Jenis Proyek</label><input type="text" id="asset-project-type" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="asset-shoot-date" class="block text-sm font-medium text-gray-300 mb-1">Tanggal Syuting</label><input type="date" id="asset-shoot-date" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="asset-type" class="block text-sm font-medium text-gray-300 mb-1">Jenis Aset</label><select id="asset-type" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"><option value="mentah">Footage Mentah</option><option value="final">Konten Final</option></select></div></div><div class="mb-6"><label for="asset-tags" class="block text-sm font-medium text-gray-300 mb-1">Tags (pisahkan dengan koma)</label><input type="text" id="asset-tags" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div class="flex justify-end gap-4"><button type="button" id="cancel-asset-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-lg">Batal</button><button type="submit" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-5 rounded-lg">Simpan</button></div></form></div></div>
-    <div id="delete-confirm-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-sm text-center transform scale-95 opacity-0"><h3 class="text-lg font-bold text-white mb-2">Yakin ingin menghapus?</h3><p id="delete-item-name" class="text-gray-300 mb-6"></p><div class="flex justify-center gap-4"><button id="cancel-delete-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-6 rounded-lg">Batal</button><button id="confirm-delete-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg">Hapus</button></div></div></div>
-    <div id="timer-alert-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-sm text-center transform scale-95 opacity-0"><div class="text-yellow-400 mb-4"><i class="ph-fill ph-timer text-5xl"></i></div><h3 class="text-lg font-bold text-white mb-2">Sesi Fokus Selesai!</h3><p class="text-gray-300 mb-6">Kerja bagus! Waktunya istirahat sejenak.</p><div class="flex justify-center"><button id="ok-timer-alert-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-8 rounded-lg">Oke</button></div></div></div>
+    <div id="language-selection-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden z-50">
+        <div class="modal-panel glass-panel rounded-xl shadow-2xl p-8 w-full max-w-sm text-center transform scale-95 opacity-0">
+            <h3 class="text-2xl font-bold mb-2 text-white">Pilih Bahasa / Select Language</h3>
+            <p class="text-gray-300 mb-6">Pilih bahasa antarmuka pilihan Anda.</p>
+            <div class="flex flex-col gap-4">
+                <button id="select-lang-id" class="w-full bg-slate-700 hover:bg-indigo-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300">
+                    🇮🇩 Bahasa Indonesia
+                </button>
+                <button id="select-lang-en" class="w-full bg-slate-700 hover:bg-indigo-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300">
+                    🇬🇧 English
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-profile-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50">
+        <div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0">
+            <form id="edit-profile-form">
+                <h3 class="text-2xl font-bold mb-6" data-lang-key="edit_profile_title">Ubah Nama Profil</h3>
+                <div class="mb-4">
+                    <label for="edit-profile-name-input" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="edit_profile_label">Nama Pengguna</label>
+                    <input type="text" id="edit-profile-name-input" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required>
+                </div>
+                <div id="edit-profile-message" class="hidden text-sm p-3 rounded-lg mb-4"></div>
+                <div class="flex justify-end gap-4">
+                    <button type="button" id="cancel-edit-profile-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-lg" data-lang-key="cancel_btn">Batal</button>
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg flex items-center gap-2">
+                        <span data-lang-key="save_btn">Simpan</span>
+                        <div id="edit-profile-loader" class="loader hidden"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="onboarding-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0"><form id="onboarding-form"><h3 class="text-2xl font-bold mb-2 text-white" data-lang-key="welcome">Selamat Datang!</h3><p class="text-gray-300 mb-6" data-lang-key="complete_profile_prompt">Lengkapi profil Anda untuk mulai.</p><div class="space-y-4"><div><label for="profile-company-name" class="block text-sm font-medium text-gray-300" data-lang-key="company_name_label">Nama Perusahaan/Komunitas</label><input type="text" id="profile-company-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="profile-field" class="block text-sm font-medium text-gray-300" data-lang-key="field_label">Bergerak di Bidang</label><input type="text" id="profile-field" data-lang-placeholder="field_placeholder" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="profile-contact" class="block text-sm font-medium text-gray-300" data-lang-key="contact_label">Kontak (Email/No. HP)</label><input type="text" id="profile-contact" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div></div><div class="flex justify-end gap-4 mt-8"><button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg flex items-center gap-2"><span data-lang-key="save_continue_btn">Simpan & Lanjutkan</span><div id="onboarding-loader" class="loader hidden"></div></button></div></form></div></div>
+    <div id="task-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0"><form id="task-form"><input type="hidden" id="task-id"><h3 id="task-modal-title" class="text-2xl font-bold mb-6" data-lang-key="add_new_project_title">Tambah Proyek Baru</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4"><div><label for="task-client-name" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="client_name_label">Nama Klien</label><input type="text" id="task-client-name" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="task-project-type" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="project_type_label">Jenis Proyek</label><input type="text" id="task-project-type" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="task-priority" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="priority_label">Prioritas</label><select id="task-priority" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"><option value="biasa" data-lang-key="priority_normal">Biasa</option><option value="penting" data-lang-key="priority_important">Penting</option><option value="mendesak" data-lang-key="priority_urgent">Mendesak</option></select></div><div><label for="task-deadline" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="deadline_label">Deadline</label><input type="date" id="task-deadline" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div class="sm:col-span-2"><label for="task-contact" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="client_contact_label">Kontak Klien</label><input type="text" id="task-contact" data-lang-placeholder="client_contact_placeholder" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div></div><div class="mb-6"><label for="brief" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="brief_notes_label">Brief / Catatan</label><textarea id="brief" rows="3" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></textarea></div><div class="flex justify-end gap-4"><button type="button" id="cancel-task-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-lg" data-lang-key="cancel_btn">Batal</button><button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg" data-lang-key="save_btn">Simpan</button></div></form></div></div>
+    <div id="asset-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0"><form id="asset-form"><input type="hidden" id="asset-id"><h3 id="asset-modal-title" class="text-2xl font-bold mb-6" data-lang-key="add_new_asset_title">Tambah Aset Baru</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4"><div class="sm:col-span-2"><label for="asset-file-link" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="asset_gdrive_link">Link Google Drive</label><input type="url" id="asset-file-link" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="asset-client-name" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="client_name_label">Nama Klien</label><input type="text" id="asset-client-name" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="asset-project-type" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="project_type_label">Jenis Proyek</label><input type="text" id="asset-project-type" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="asset-shoot-date" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="asset_shoot_date">Tanggal Syuting</label><input type="date" id="asset-shoot-date" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="asset-type" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="asset_type">Jenis Aset</label><select id="asset-type" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"><option value="mentah" data-lang-key="asset_type_raw">Footage Mentah</option><option value="final" data-lang-key="asset_type_final">Konten Final</option></select></div></div><div class="mb-6"><label for="asset-tags" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="asset_tags">Tags (pisahkan dengan koma)</label><input type="text" id="asset-tags" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div class="flex justify-end gap-4"><button type="button" id="cancel-asset-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-lg" data-lang-key="cancel_btn">Batal</button><button type="submit" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-5 rounded-lg" data-lang-key="save_btn">Simpan</button></div></form></div></div>
+    <div id="delete-confirm-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-sm text-center transform scale-95 opacity-0"><h3 class="text-lg font-bold text-white mb-2" data-lang-key="delete_confirm_title">Yakin ingin menghapus?</h3><p id="delete-item-name" class="text-gray-300 mb-6"></p><div class="flex justify-center gap-4"><button id="cancel-delete-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-6 rounded-lg" data-lang-key="cancel_btn">Batal</button><button id="confirm-delete-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg" data-lang-key="delete_btn">Hapus</button></div></div></div>
+    <div id="timer-alert-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-sm text-center transform scale-95 opacity-0"><div class="text-yellow-400 mb-4"><i class="ph-fill ph-timer text-5xl"></i></div><h3 class="text-lg font-bold text-white mb-2" data-lang-key="timer_done_title">Sesi Fokus Selesai!</h3><p class="text-gray-300 mb-6" data-lang-key="timer_done_desc">Kerja bagus! Waktunya istirahat sejenak.</p><div class="flex justify-center"><button id="ok-timer-alert-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-8 rounded-lg" data-lang-key="ok_btn">Oke</button></div></div></div>
     <div id="comments-panel-overlay" class="fixed inset-0 bg-black bg-opacity-70 hidden z-40"></div>
-    <div id="comments-panel" class="side-panel glass-panel fixed top-0 right-0 h-full w-full max-w-md shadow-2xl transform translate-x-full z-50 flex flex-col"><div class="flex justify-between items-center p-4 border-b border-white/10 flex-shrink-0"><h3 id="comments-task-title" class="text-lg font-bold text-white truncate pr-4">Komentar</h3><button id="close-comments-btn" class="p-2 text-gray-400 hover:text-white"><i class="ph-bold ph-x text-xl"></i></button></div><div id="comments-list" class="flex-grow p-4 overflow-y-auto custom-scrollbar"></div><div class="p-4 border-t border-white/10 flex-shrink-0"><form id="comment-form" class="flex gap-2"><input type="text" id="comment-input" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Tulis komentar..." required><button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-lg flex items-center justify-center"><i class="ph-bold ph-paper-plane-tilt text-xl"></i></button></form></div></div>
-    <div id="focus-bar" class="fixed bottom-0 left-0 right-0 glass-panel shadow-lg"><div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-2 grid grid-cols-2 md:grid-cols-3 items-center gap-4"><div class="flex items-center gap-3 justify-start"><i class="ph-bold ph-timer text-xl text-yellow-400"></i><span class="font-semibold text-white hidden sm:inline">Editor Focus</span><span id="timer-display" class="text-lg font-mono bg-slate-900/70 text-white px-2 py-0.5 rounded-md">30:00</span></div><div class="hidden md:flex flex-col items-center justify-center"><div class="w-full max-w-xs bg-slate-600/50 rounded-full h-2.5"><div id="timer-progress" class="bg-yellow-400 h-2.5 rounded-full" style="width: 100%;"></div></div></div><div class="flex items-center gap-4 justify-end">
+    <div id="comments-panel" class="side-panel glass-panel fixed top-0 right-0 h-full w-full max-w-md shadow-2xl transform translate-x-full z-50 flex flex-col"><div class="flex justify-between items-center p-4 border-b border-white/10 flex-shrink-0"><h3 id="comments-task-title" class="text-lg font-bold text-white truncate pr-4">Komentar</h3><button id="close-comments-btn" class="p-2 text-gray-400 hover:text-white"><i class="ph-bold ph-x text-xl"></i></button></div><div id="comments-list" class="flex-grow p-4 overflow-y-auto custom-scrollbar"></div><div class="p-4 border-t border-white/10 flex-shrink-0"><form id="comment-form" class="flex gap-2"><input type="text" id="comment-input" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none" data-lang-placeholder="comment_placeholder" required><button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-lg flex items-center justify-center"><i class="ph-bold ph-paper-plane-tilt text-xl"></i></button></form></div></div>
+    <div id="focus-bar" class="fixed bottom-0 left-0 right-0 glass-panel shadow-lg"><div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-2 grid grid-cols-2 md:grid-cols-3 items-center gap-4"><div class="flex items-center gap-3 justify-start"><i class="ph-bold ph-timer text-xl text-yellow-400"></i><span class="font-semibold text-white hidden sm:inline" data-lang-key="timer_title">Editor Focus</span><span id="timer-display" class="text-lg font-mono bg-slate-900/70 text-white px-2 py-0.5 rounded-md">30:00</span></div><div class="hidden md:flex flex-col items-center justify-center"><div class="w-full max-w-xs bg-slate-600/50 rounded-full h-2.5"><div id="timer-progress" class="bg-yellow-400 h-2.5 rounded-full" style="width: 100%;"></div></div></div><div class="flex items-center gap-4 justify-end">
         <div class="text-xs text-gray-500 hidden lg:block">FocusCut Version 0.2</div>
         <div class="flex items-center gap-2"><button id="start-timer-btn" class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition-colors"><i class="ph-bold ph-play"></i></button><button id="pause-timer-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full transition-colors hidden"><i class="ph-bold ph-pause"></i></button><button id="reset-timer-btn" class="bg-red-600 hover:bg-red-700 text-white p-2 rounded-full transition-colors"><i class="ph-bold ph-arrow-counter-clockwise"></i></button></div></div></div></div>
 
@@ -195,20 +237,117 @@
         let currentUser = null;
         let userProfileData = {};
         let allTasksCache = [];
-        let allAssetsCache = []; // Cache untuk semua aset
+        let allAssetsCache = [];
         let unsubscribeComments = null;
         let completedTasksChart = null;
         let artistDistributionChart = null;
+        let currentLanguage = 'id'; // Default language
 
-        // --- ELEMEN UTAMA (TIDAK DIUBAH) ---
+        // --- ELEMEN UTAMA ---
         const loginScreen = document.getElementById('login-screen');
         const appScreen = document.getElementById('app-screen');
         const googleLoginBtn = document.getElementById('google-login-btn');
         const loginErrorMsg = document.getElementById('login-error-message');
 
-        // --- FUNGSI MODAL HELPER (TIDAK DIUBAH) ---
+        // --- KAMUS TRANSLASI ---
+        const translations = {
+            id: {
+                login_prompt: 'Masuk untuk melanjutkan ke dasbor Anda.', login_button: 'Masuk dengan Google', logged_in_as: 'Login sebagai:',
+                change_bg_title: 'Ganti Latar Belakang', logout_title: 'Keluar', add_project_btn: 'Tambah Proyek', add_asset_btn: 'Tambah Aset',
+                nav_kanban: 'Papan Proyek', nav_assets: 'Bank Konten', nav_invoice: 'Invoice', nav_analytics: 'Analitik',
+                search_placeholder: 'Cari nama klien, proyek, atau tanggal (YYYY-MM-DD)...',
+                sort_date_desc: 'Urutkan: Tanggal (Terbaru)', sort_date_asc: 'Urutkan: Tanggal (Terlama)', sort_name_az: 'Urutkan: Nama Klien (A-Z)', sort_name_za: 'Urutkan: Nama Klien (Z-A)',
+                kanban_todo: 'List Konten', kanban_wip: 'Proses Editing', kanban_review: 'Review / Revisi', kanban_done: 'Selesai',
+                asset_search_placeholder: 'Cari berdasarkan klien, proyek, atau tag...',
+                welcome: 'Selamat Datang!', complete_profile_prompt: 'Lengkapi profil Anda untuk mulai.',
+                company_name_label: 'Nama Perusahaan/Komunitas', field_label: 'Bergerak di Bidang', field_placeholder: 'cth: Video Editor, Agensi Kreatif', contact_label: 'Kontak (Email/No. HP)',
+                save_continue_btn: 'Simpan & Lanjutkan',
+                add_new_project_title: 'Tambah Proyek Baru', add_new_asset_title: 'Tambah Aset Baru',
+                client_name_label: 'Nama Klien', project_type_label: 'Jenis Proyek',
+                priority_label: 'Prioritas', priority_normal: 'Biasa', priority_important: 'Penting', priority_urgent: 'Mendesak',
+                deadline_label: 'Deadline', client_contact_label: 'Kontak Klien', client_contact_placeholder: 'Email atau No. HP', brief_notes_label: 'Brief / Catatan',
+                cancel_btn: 'Batal', save_btn: 'Simpan', delete_confirm_title: 'Yakin ingin menghapus?', delete_btn: 'Hapus',
+                edit_profile_title: 'Ubah Nama Profil', edit_profile_label: 'Nama Pengguna',
+                comment_placeholder: 'Tulis komentar...', comment_title_prefix: 'Catatan untuk:', no_comments: 'Belum ada komentar.', comment_load_error: 'Gagal memuat komentar.',
+                profile_update_success: 'Nama berhasil diperbarui!', profile_update_error: 'Gagal memperbarui nama.',
+                asset_gdrive_link: 'Link Google Drive', asset_shoot_date: 'Tanggal Syuting', asset_type: 'Jenis Aset', asset_type_raw: 'Footage Mentah', asset_type_final: 'Konten Final', asset_tags: 'Tags (pisahkan dengan koma)',
+                invoice_create_title: 'Buat Invoice', invoice_client_info: 'Informasi Klien', invoice_client_email: 'Email Klien', invoice_due_date: 'Tanggal Jatuh Tempo', invoice_items: 'Item Tagihan', invoice_add_item: '+ Tambah Item', invoice_payment_info: 'Informasi Pembayaran', invoice_bank_name: 'Nama Bank', invoice_account_name: 'Nama Pemilik Rekening', invoice_account_number: 'Nomor Rekening', invoice_save_bank_info: 'Simpan Info Bank', invoice_save_bank_info_title: 'Simpan Info Bank', invoice_export_pdf: 'Export PDF',
+                analytics_total_done: 'Total Proyek Selesai', analytics_this_month: 'Proyek Bulan Ini', analytics_avg_time: 'Rata-rata Waktu Pengerjaan', analytics_completed_weekly: 'Proyek Selesai per Minggu', analytics_client_dist: 'Distribusi Konten per Klien',
+                timer_title: 'Editor Focus', timer_done_title: 'Sesi Fokus Selesai!', timer_done_desc: 'Kerja bagus! Waktunya istirahat sejenak.', ok_btn: 'Oke'
+            },
+            en: {
+                login_prompt: 'Sign in to continue to your dashboard.', login_button: 'Sign in with Google', logged_in_as: 'Logged in as:',
+                change_bg_title: 'Change Background', logout_title: 'Logout', add_project_btn: 'Add Project', add_asset_btn: 'Add Asset',
+                nav_kanban: 'Project Board', nav_assets: 'Content Bank', nav_invoice: 'Invoice', nav_analytics: 'Analytics',
+                search_placeholder: 'Search client name, project, or date (YYYY-MM-DD)...',
+                sort_date_desc: 'Sort by: Date (Newest)', sort_date_asc: 'Sort by: Date (Oldest)', sort_name_az: 'Sort by: Client Name (A-Z)', sort_name_za: 'Sort by: Client Name (Z-A)',
+                kanban_todo: 'Content List', kanban_wip: 'Editing Process', kanban_review: 'Review / Revision', kanban_done: 'Completed',
+                asset_search_placeholder: 'Search by client, project, or tags...',
+                welcome: 'Welcome!', complete_profile_prompt: 'Complete your profile to get started.',
+                company_name_label: 'Company/Community Name', field_label: 'Field of Business', field_placeholder: 'e.g., Video Editor, Creative Agency', contact_label: 'Contact (Email/Phone No.)',
+                save_continue_btn: 'Save & Continue',
+                add_new_project_title: 'Add New Project', add_new_asset_title: 'Add New Asset',
+                client_name_label: 'Client Name', project_type_label: 'Project Type',
+                priority_label: 'Priority', priority_normal: 'Normal', priority_important: 'Important', priority_urgent: 'Urgent',
+                deadline_label: 'Deadline', client_contact_label: 'Client Contact', client_contact_placeholder: 'Email or Phone No.', brief_notes_label: 'Brief / Notes',
+                cancel_btn: 'Cancel', save_btn: 'Save', delete_confirm_title: 'Are you sure you want to delete?', delete_btn: 'Delete',
+                edit_profile_title: 'Edit Profile Name', edit_profile_label: 'Username',
+                comment_placeholder: 'Write a comment...', comment_title_prefix: 'Notes for:', no_comments: 'No comments yet.', comment_load_error: 'Failed to load comments.',
+                profile_update_success: 'Name updated successfully!', profile_update_error: 'Failed to update name.',
+                asset_gdrive_link: 'Google Drive Link', asset_shoot_date: 'Shoot Date', asset_type: 'Asset Type', asset_type_raw: 'Raw Footage', asset_type_final: 'Final Content', asset_tags: 'Tags (comma separated)',
+                invoice_create_title: 'Create Invoice', invoice_client_info: 'Client Information', invoice_client_email: 'Client Email', invoice_due_date: 'Due Date', invoice_items: 'Billable Items', invoice_add_item: '+ Add Item', invoice_payment_info: 'Payment Information', invoice_bank_name: 'Bank Name', invoice_account_name: 'Account Holder Name', invoice_account_number: 'Account Number', invoice_save_bank_info: 'Save Bank Info', invoice_save_bank_info_title: 'Save Bank Info', invoice_export_pdf: 'Export PDF',
+                analytics_total_done: 'Total Completed Projects', analytics_this_month: 'Projects This Month', analytics_avg_time: 'Average Completion Time', analytics_completed_weekly: 'Projects Completed per Week', analytics_client_dist: 'Content Distribution per Client',
+                timer_title: 'Editor Focus', timer_done_title: 'Focus Session Complete!', timer_done_desc: 'Great work! Time for a short break.', ok_btn: 'OK'
+            }
+        };
+
+        // --- FUNGSI MODAL HELPER ---
         const openModal = (modalElement) => { if (modalElement) { modalElement.classList.remove('hidden'); setTimeout(() => { if (modalElement.firstElementChild) modalElement.firstElementChild.classList.remove('scale-95', 'opacity-0'); }, 10); }};
         const closeModal = (modalElement) => { if (modalElement) { if (modalElement.firstElementChild) modalElement.firstElementChild.classList.add('scale-95', 'opacity-0'); setTimeout(() => modalElement.classList.add('hidden'), 300); }};
+
+        // --- FUNGSI BAHASA ---
+        function applyLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('preferredLanguage', lang);
+            document.documentElement.lang = lang;
+            document.getElementById('language-flag').textContent = lang === 'id' ? '🇮🇩' : '🇬🇧';
+
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.dataset.langKey;
+                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
+            });
+            document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+                const key = el.dataset.langPlaceholder;
+                if (translations[lang] && translations[lang][key]) el.placeholder = translations[lang][key];
+            });
+            document.querySelectorAll('[data-lang-title]').forEach(el => {
+                const key = el.dataset.langTitle;
+                if (translations[lang] && translations[lang][key]) el.title = translations[lang][key];
+            });
+        }
+
+        function setupLanguageSwitcher() {
+            const langModal = document.getElementById('language-selection-modal');
+            document.getElementById('select-lang-id').addEventListener('click', () => {
+                applyLanguage('id');
+                closeModal(langModal);
+                if (!userProfileData.companyName) {
+                    openModal(document.getElementById('onboarding-modal'));
+                } else {
+                    initializeAppUI(currentUser, userProfileData);
+                }
+            });
+            document.getElementById('select-lang-en').addEventListener('click', () => {
+                applyLanguage('en');
+                closeModal(langModal);
+                if (!userProfileData.companyName) {
+                    openModal(document.getElementById('onboarding-modal'));
+                } else {
+                     initializeAppUI(currentUser, userProfileData);
+                }
+            });
+            document.getElementById('language-switcher-btn').addEventListener('click', () => openModal(langModal));
+        }
 
         // --- LOGIKA OTENTIKASI (TIDAK DIUBAH) ---
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -247,15 +386,22 @@
             }
         });
 
-        // --- FUNGSI ALUR APLIKASI UTAMA (TIDAK DIUBAH) ---
+        // --- FUNGSI ALUR APLIKASI UTAMA ---
         function startAppFlow(user, profileData) {
             loginScreen.style.display = 'none';
-            if (profileData && profileData.companyName) {
-                initializeAppUI(user, profileData);
+            setupLanguageSwitcher(); 
+            
+            const preferredLanguage = localStorage.getItem('preferredLanguage');
+            if (preferredLanguage) {
+                applyLanguage(preferredLanguage);
+                if (profileData && profileData.companyName) {
+                    initializeAppUI(user, profileData);
+                } else {
+                    openModal(document.getElementById('onboarding-modal'));
+                    setupOnboarding(user, profileData || {});
+                }
             } else {
-                appScreen.style.display = 'none'; 
-                openModal(document.getElementById('onboarding-modal'));
-                setupOnboarding(user, profileData || {});
+                openModal(document.getElementById('language-selection-modal'));
             }
         }
 
@@ -280,17 +426,20 @@
             };
         }
 
-        // --- FUNGSI INISIALISASI UI UTAMA ---
+        // --- FUNGSI INISIALISASI UI UTAMA (LENGKAP) ---
         function initializeAppUI(user, profileData) {
             appScreen.style.display = 'flex';
             document.getElementById('company-name-display').textContent = profileData.companyName || 'Nama Perusahaan';
-            document.getElementById('user-name-display').textContent = profileData.displayName || user.email;
+            updateUserDisplayNameUI(profileData.displayName || user.displayName);
             document.getElementById('profile-pic').src = profileData.photoURL || user.photoURL || 'https://placehold.co/100x100/1e293b/94a3b8?text=User';
             if (profileData.backgroundURL) {
                 document.body.style.backgroundImage = `url('${profileData.backgroundURL}')`;
             }
 
             document.getElementById('logout-btn').addEventListener('click', () => auth.signOut());
+            
+            // Setup semua fitur
+            setupProfileEditor(user); 
             setupProfilePicUpload(user, profileData);
             setupBgUpload(user);
             setupNavigation();
@@ -298,16 +447,67 @@
             setupKanbanInteractions(user, profileData);
             setupAssetInteractions();
             setupCommentSubmission(user, profileData);
-            setupInvoiceGenerator(user, profileData); 
+            setupInvoiceGenerator(user, profileData);
             setupTimer();
             setupTaskSearchAndSort();
-            // REVISI: Panggil fungsi setup untuk search aset
             setupAssetSearch();
+            
+            // Listener data
             listenToTasks(user.uid);
             listenToAssets(user.uid);
+
+            // Terapkan bahasa ke elemen yang mungkin baru ditampilkan
+            applyLanguage(currentLanguage);
+        }
+
+        // --- FUNGSI EDIT PROFIL ---
+        function updateUserDisplayNameUI(newName) {
+            document.getElementById('user-name-display').textContent = newName;
+        }
+        function setupProfileEditor(user) {
+            const editProfileBtn = document.getElementById('edit-profile-btn');
+            const editProfileModal = document.getElementById('edit-profile-modal');
+            const editProfileForm = document.getElementById('edit-profile-form');
+            const nameInput = document.getElementById('edit-profile-name-input');
+            const cancelBtn = document.getElementById('cancel-edit-profile-btn');
+            const loader = document.getElementById('edit-profile-loader');
+            const messageEl = document.getElementById('edit-profile-message');
+
+            editProfileBtn.addEventListener('click', () => {
+                nameInput.value = userProfileData.displayName || user.displayName;
+                messageEl.classList.add('hidden');
+                openModal(editProfileModal);
+            });
+
+            cancelBtn.addEventListener('click', () => closeModal(editProfileModal));
+
+            editProfileForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const newName = nameInput.value.trim();
+                if (!newName || newName === userProfileData.displayName) {
+                    closeModal(editProfileModal);
+                    return;
+                }
+                loader.classList.remove('hidden');
+                try {
+                    await db.collection('whitelisted_users').doc(user.email).update({ displayName: newName });
+                    userProfileData.displayName = newName;
+                    updateUserDisplayNameUI(newName);
+                    messageEl.textContent = translations[currentLanguage].profile_update_success;
+                    messageEl.className = 'text-sm bg-green-900/50 text-green-300 p-3 rounded-lg mb-4';
+                    messageEl.classList.remove('hidden');
+                    setTimeout(() => { closeModal(editProfileModal); loader.classList.add('hidden'); }, 1500);
+                } catch (error) {
+                    console.error("Error updating profile name:", error);
+                    messageEl.textContent = translations[currentLanguage].profile_update_error;
+                    messageEl.className = 'text-sm bg-red-900/50 text-red-300 p-3 rounded-lg mb-4';
+                    messageEl.classList.remove('hidden');
+                    loader.classList.add('hidden');
+                }
+            });
         }
         
-        // --- FUNGSI SEARCH & SORT PROYEK ---
+        // --- SEMUA FUNGSI ASLI DIKEMBALIKAN ---
         function setupTaskSearchAndSort() {
             const taskSearchInput = document.getElementById('task-search-input');
             const taskSortSelect = document.getElementById('task-sort-select');
@@ -325,9 +525,7 @@
                 const clientName = task.clientName?.toLowerCase() || '';
                 const projectType = task.projectType?.toLowerCase() || '';
                 const deadline = task.deadline || '';
-                return clientName.includes(searchTerm) || 
-                       projectType.includes(searchTerm) ||
-                       deadline.includes(searchTerm);
+                return clientName.includes(searchTerm) || projectType.includes(searchTerm) || deadline.includes(searchTerm);
             });
             processedTasks.sort((a, b) => {
                 switch (sortBy) {
@@ -341,7 +539,6 @@
             renderAllTasks(processedTasks);
         }
 
-        // --- REVISI: FUNGSI BARU UNTUK SEARCH ASET ---
         function setupAssetSearch() {
             const assetSearchInput = document.getElementById('asset-search-input');
             assetSearchInput.addEventListener('input', filterAssets);
@@ -350,35 +547,24 @@
         function filterAssets() {
             const assetSearchInput = document.getElementById('asset-search-input');
             const searchTerm = assetSearchInput.value.toLowerCase();
-
-            // Filter dari cache `allAssetsCache`
             const filteredAssets = allAssetsCache.filter(asset => {
-                if (!searchTerm) return true; // Tampilkan semua jika search kosong
-
+                if (!searchTerm) return true;
                 const clientName = asset.clientName?.toLowerCase() || '';
                 const projectType = asset.projectType?.toLowerCase() || '';
-                const tags = (asset.tags || []).join(' ').toLowerCase(); // Gabungkan tag jadi satu string
-
-                // Cek apakah search term ada di salah satu field
-                return clientName.includes(searchTerm) ||
-                       projectType.includes(searchTerm) ||
-                       tags.includes(searchTerm);
+                const tags = (asset.tags || []).join(' ').toLowerCase();
+                return clientName.includes(searchTerm) || projectType.includes(searchTerm) || tags.includes(searchTerm);
             });
-
-            // Render hasil filter
             renderAllAssets(filteredAssets);
         }
 
-        // --- FUNGSI `listenToTasks` ---
         function listenToTasks(uid) {
             db.collection('tasks').where('ownerId', '==', uid).onSnapshot(snapshot => {
                 allTasksCache = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 filterAndSortTasks();
-                updateAnalytics(allTasksCache); 
+                updateAnalytics(allTasksCache);
             }, error => console.error("Error mendengarkan perubahan proyek:", error));
         }
         
-        // --- FUNGSI `renderAllTasks` ---
         function renderAllTasks(tasksToRender) {
             const columns = { todo: document.getElementById('todo-column'), wip: document.getElementById('wip-column'), review: document.getElementById('review-column'), done: document.getElementById('done-column') };
             const counts = { todo: 0, wip: 0, review: 0, done: 0 };
@@ -401,7 +587,6 @@
             setTimeout(() => document.getElementById('kanban-scroll-wrapper')?.dispatchEvent(new Event('scroll')), 100);
         }
 
-        // --- FUNGSI INVOICE ---
         function setupInvoiceGenerator(user, profileData) {
             const invoiceForm = document.getElementById('invoice-form');
             const itemsContainer = document.getElementById('invoice-items-container');
@@ -470,7 +655,6 @@
             renderPreview();
         }
 
-        // --- FUNGSI KOMENTAR ---
         function setupCommentSubmission(user, profileData) {
             const form = document.getElementById('comment-form');
             const newForm = form.cloneNode(true);
@@ -491,7 +675,7 @@
             const overlay = document.getElementById('comments-panel-overlay');
             const titleEl = document.getElementById('comments-task-title');
             const form = document.getElementById('comment-form');
-            titleEl.textContent = `Catatan untuk: ${taskTitle}`;
+            titleEl.textContent = `${translations[currentLanguage].comment_title_prefix} ${taskTitle}`;
             form.dataset.taskId = taskId;
             if (unsubscribeComments) unsubscribeComments();
             document.body.classList.add('comments-open');
@@ -513,7 +697,7 @@
             const commentsPath = db.collection('tasks').doc(taskId).collection('comments').orderBy('createdAt', 'asc');
             unsubscribeComments = commentsPath.onSnapshot(snapshot => {
                 commentsList.innerHTML = '';
-                if (snapshot.empty) { commentsList.innerHTML = `<p class="text-center text-gray-400 mt-4">Belum ada komentar.</p>`; return; }
+                if (snapshot.empty) { commentsList.innerHTML = `<p class="text-center text-gray-400 mt-4">${translations[currentLanguage].no_comments}</p>`; return; }
                 snapshot.forEach(doc => {
                     const comment = doc.data();
                     const commentEl = document.createElement('div');
@@ -523,10 +707,9 @@
                     commentsList.appendChild(commentEl);
                 });
                 commentsList.scrollTop = commentsList.scrollHeight;
-            }, err => { console.error("Gagal memuat komentar:", err); commentsList.innerHTML = `<p class="text-center text-red-400 mt-4">Gagal memuat komentar.</p>`; });
+            }, err => { console.error("Gagal memuat komentar:", err); commentsList.innerHTML = `<p class="text-center text-red-400 mt-4">${translations[currentLanguage].comment_load_error}</p>`; });
         }
         
-        // --- FUNGSI INTI LAINNYA ---
         function setupKanbanInteractions(user, profileData) {
             const kanbanBoard = document.getElementById('kanban-board');
             kanbanBoard.addEventListener('click', e => {
@@ -576,6 +759,7 @@
             document.getElementById('delete-item-name').textContent = `"${itemName}" akan dihapus permanen.`;
             const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
             const newConfirmBtn = confirmDeleteBtn.cloneNode(true);
+            newConfirmBtn.textContent = translations[currentLanguage].delete_btn; // Update button text
             confirmDeleteBtn.parentNode.replaceChild(newConfirmBtn, confirmDeleteBtn);
             newConfirmBtn.addEventListener('click', () => {
                 const collectionName = itemType === 'task' ? 'tasks' : 'assets';
@@ -586,10 +770,9 @@
             openModal(deleteConfirmModal);
         }
         
-        // REVISI: Fungsi `renderAllAssets` diubah untuk menerima parameter
         function renderAllAssets(assetsToRender) {
             const grid = document.getElementById('assets-grid');
-            grid.innerHTML = ''; // Kosongkan grid sebelum render ulang
+            grid.innerHTML = '';
             if (assetsToRender.length === 0) {
                 grid.innerHTML = `<p class="text-center text-gray-400 col-span-full mt-8">Aset tidak ditemukan.</p>`;
                 return;
@@ -604,12 +787,9 @@
             });
         }
         
-        // REVISI: Fungsi `listenToAssets` diubah untuk memanggil fungsi filter
         function listenToAssets(uid) {
             db.collection('assets').where('ownerId', '==', uid).onSnapshot(snapshot => {
-                // Simpan data mentah ke cache
                 allAssetsCache = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                // Panggil fungsi filter untuk menampilkan data awal
                 filterAssets();
             }, error => console.error("Error mendengarkan perubahan aset:", error));
         }
