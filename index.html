@@ -94,7 +94,11 @@
                 </label>
                 <input type="file" id="profile-pic-input" class="hidden" accept="image/*">
                 <div>
-                    <h1 id="company-name-display" class="text-xl sm:text-2xl font-bold text-white">Nama Perusahaan</h1>
+                    <!-- PENAMBAHAN: Tombol edit untuk nama perusahaan -->
+                    <div class="flex items-center gap-2">
+                         <h1 id="company-name-display" class="text-xl sm:text-2xl font-bold text-white">Nama Perusahaan</h1>
+                         <button id="edit-company-btn" class="text-gray-400 hover:text-white" title="Edit Nama Perusahaan"><i class="ph ph-pencil-simple"></i></button>
+                    </div>
                     <p id="user-info" class="text-sm text-gray-300 flex items-center gap-2">
                         <span data-lang-key="logged_in_as">Login sebagai:</span>
                         <span id="user-name-display"></span>
@@ -183,16 +187,23 @@
         </div>
     </div>
 
+    <!-- PENAMBAHAN: Modal Edit Profil digabung -->
     <div id="edit-profile-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50">
         <div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0">
             <form id="edit-profile-form">
-                <h3 class="text-2xl font-bold mb-6" data-lang-key="edit_profile_title">Ubah Nama Profil</h3>
-                <div class="mb-4">
-                    <label for="edit-profile-name-input" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="edit_profile_label">Nama Pengguna</label>
-                    <input type="text" id="edit-profile-name-input" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required>
+                <h3 class="text-2xl font-bold mb-6" data-lang-key="edit_profile_title">Ubah Profil</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="edit-profile-name-input" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="edit_profile_label">Nama Pengguna</label>
+                        <input type="text" id="edit-profile-name-input" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required>
+                    </div>
+                    <div>
+                        <label for="edit-company-name-input" class="block text-sm font-medium text-gray-300 mb-1" data-lang-key="company_name_label">Nama Perusahaan</label>
+                        <input type="text" id="edit-company-name-input" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required>
+                    </div>
                 </div>
-                <div id="edit-profile-message" class="hidden text-sm p-3 rounded-lg mb-4"></div>
-                <div class="flex justify-end gap-4">
+                <div id="edit-profile-message" class="hidden text-sm p-3 rounded-lg mt-4"></div>
+                <div class="flex justify-end gap-4 mt-6">
                     <button type="button" id="cancel-edit-profile-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-lg" data-lang-key="cancel_btn">Batal</button>
                     <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg flex items-center gap-2">
                         <span data-lang-key="save_btn">Simpan</span>
@@ -260,16 +271,16 @@
                 kanban_todo: 'List Konten', kanban_wip: 'Proses Editing', kanban_review: 'Review / Revisi', kanban_done: 'Selesai',
                 asset_search_placeholder: 'Cari berdasarkan klien, proyek, atau tag...',
                 welcome: 'Selamat Datang!', complete_profile_prompt: 'Lengkapi profil Anda untuk mulai.',
-                company_name_label: 'Nama Perusahaan/Komunitas', field_label: 'Bergerak di Bidang', field_placeholder: 'cth: Video Editor, Agensi Kreatif', contact_label: 'Kontak (Email/No. HP)',
+                company_name_label: 'Nama Perusahaan', field_label: 'Bergerak di Bidang', field_placeholder: 'cth: Video Editor, Agensi Kreatif', contact_label: 'Kontak (Email/No. HP)',
                 save_continue_btn: 'Simpan & Lanjutkan',
                 add_new_project_title: 'Tambah Proyek Baru', add_new_asset_title: 'Tambah Aset Baru',
                 client_name_label: 'Nama Klien', project_type_label: 'Jenis Proyek',
                 priority_label: 'Prioritas', priority_normal: 'Biasa', priority_important: 'Penting', priority_urgent: 'Mendesak',
                 deadline_label: 'Deadline', client_contact_label: 'Kontak Klien', client_contact_placeholder: 'Email atau No. HP', brief_notes_label: 'Brief / Catatan',
                 cancel_btn: 'Batal', save_btn: 'Simpan', delete_confirm_title: 'Yakin ingin menghapus?', delete_btn: 'Hapus',
-                edit_profile_title: 'Ubah Nama Profil', edit_profile_label: 'Nama Pengguna',
+                edit_profile_title: 'Ubah Profil', edit_profile_label: 'Nama Pengguna',
                 comment_placeholder: 'Tulis komentar...', comment_title_prefix: 'Catatan untuk:', no_comments: 'Belum ada komentar.', comment_load_error: 'Gagal memuat komentar.',
-                profile_update_success: 'Nama berhasil diperbarui!', profile_update_error: 'Gagal memperbarui nama.',
+                profile_update_success: 'Profil berhasil diperbarui!', profile_update_error: 'Gagal memperbarui profil.',
                 asset_gdrive_link: 'Link Google Drive', asset_shoot_date: 'Tanggal Syuting', asset_type: 'Jenis Aset', asset_type_raw: 'Footage Mentah', asset_type_final: 'Konten Final', asset_tags: 'Tags (pisahkan dengan koma)',
                 invoice_create_title: 'Buat Invoice', invoice_client_info: 'Informasi Klien', invoice_client_email: 'Email Klien', invoice_due_date: 'Tanggal Jatuh Tempo', invoice_items: 'Item Tagihan', invoice_add_item: '+ Tambah Item', invoice_payment_info: 'Informasi Pembayaran', invoice_bank_name: 'Nama Bank', invoice_account_name: 'Nama Pemilik Rekening', invoice_account_number: 'Nomor Rekening', invoice_save_bank_info: 'Simpan Info Bank', invoice_save_bank_info_title: 'Simpan Info Bank', invoice_export_pdf: 'Export PDF',
                 analytics_total_done: 'Total Proyek Selesai', analytics_this_month: 'Proyek Bulan Ini', analytics_avg_time: 'Rata-rata Waktu Pengerjaan', analytics_completed_weekly: 'Proyek Selesai per Minggu', analytics_client_dist: 'Distribusi Konten per Klien',
@@ -284,16 +295,16 @@
                 kanban_todo: 'Content List', kanban_wip: 'Editing Process', kanban_review: 'Review / Revision', kanban_done: 'Completed',
                 asset_search_placeholder: 'Search by client, project, or tags...',
                 welcome: 'Welcome!', complete_profile_prompt: 'Complete your profile to get started.',
-                company_name_label: 'Company/Community Name', field_label: 'Field of Business', field_placeholder: 'e.g., Video Editor, Creative Agency', contact_label: 'Contact (Email/Phone No.)',
+                company_name_label: 'Company Name', field_label: 'Field of Business', field_placeholder: 'e.g., Video Editor, Creative Agency', contact_label: 'Contact (Email/Phone No.)',
                 save_continue_btn: 'Save & Continue',
                 add_new_project_title: 'Add New Project', add_new_asset_title: 'Add New Asset',
                 client_name_label: 'Client Name', project_type_label: 'Project Type',
                 priority_label: 'Priority', priority_normal: 'Normal', priority_important: 'Important', priority_urgent: 'Urgent',
                 deadline_label: 'Deadline', client_contact_label: 'Client Contact', client_contact_placeholder: 'Email or Phone No.', brief_notes_label: 'Brief / Notes',
                 cancel_btn: 'Cancel', save_btn: 'Save', delete_confirm_title: 'Are you sure you want to delete?', delete_btn: 'Delete',
-                edit_profile_title: 'Edit Profile Name', edit_profile_label: 'Username',
+                edit_profile_title: 'Edit Profile', edit_profile_label: 'Username',
                 comment_placeholder: 'Write a comment...', comment_title_prefix: 'Notes for:', no_comments: 'No comments yet.', comment_load_error: 'Failed to load comments.',
-                profile_update_success: 'Name updated successfully!', profile_update_error: 'Failed to update name.',
+                profile_update_success: 'Profile updated successfully!', profile_update_error: 'Failed to update profile.',
                 asset_gdrive_link: 'Google Drive Link', asset_shoot_date: 'Shoot Date', asset_type: 'Asset Type', asset_type_raw: 'Raw Footage', asset_type_final: 'Final Content', asset_tags: 'Tags (comma separated)',
                 invoice_create_title: 'Create Invoice', invoice_client_info: 'Client Information', invoice_client_email: 'Client Email', invoice_due_date: 'Due Date', invoice_items: 'Billable Items', invoice_add_item: '+ Add Item', invoice_payment_info: 'Payment Information', invoice_bank_name: 'Bank Name', invoice_account_name: 'Account Holder Name', invoice_account_number: 'Account Number', invoice_save_bank_info: 'Save Bank Info', invoice_save_bank_info_title: 'Save Bank Info', invoice_export_pdf: 'Export PDF',
                 analytics_total_done: 'Total Completed Projects', analytics_this_month: 'Projects This Month', analytics_avg_time: 'Average Completion Time', analytics_completed_weekly: 'Projects Completed per Week', analytics_client_dist: 'Content Distribution per Client',
@@ -429,7 +440,7 @@
         // --- FUNGSI INISIALISASI UI UTAMA (LENGKAP) ---
         function initializeAppUI(user, profileData) {
             appScreen.style.display = 'flex';
-            document.getElementById('company-name-display').textContent = profileData.companyName || 'Nama Perusahaan';
+            updateCompanyNameUI(profileData.companyName || 'Nama Perusahaan');
             updateUserDisplayNameUI(profileData.displayName || user.displayName);
             document.getElementById('profile-pic').src = profileData.photoURL || user.photoURL || 'https://placehold.co/100x100/1e293b/94a3b8?text=User';
             if (profileData.backgroundURL) {
@@ -464,43 +475,72 @@
         function updateUserDisplayNameUI(newName) {
             document.getElementById('user-name-display').textContent = newName;
         }
+        function updateCompanyNameUI(newName) {
+            document.getElementById('company-name-display').textContent = newName;
+        }
+
         function setupProfileEditor(user) {
             const editProfileBtn = document.getElementById('edit-profile-btn');
+            const editCompanyBtn = document.getElementById('edit-company-btn');
             const editProfileModal = document.getElementById('edit-profile-modal');
             const editProfileForm = document.getElementById('edit-profile-form');
             const nameInput = document.getElementById('edit-profile-name-input');
+            const companyNameInput = document.getElementById('edit-company-name-input');
             const cancelBtn = document.getElementById('cancel-edit-profile-btn');
             const loader = document.getElementById('edit-profile-loader');
             const messageEl = document.getElementById('edit-profile-message');
 
-            editProfileBtn.addEventListener('click', () => {
+            const openEditModal = () => {
                 nameInput.value = userProfileData.displayName || user.displayName;
+                companyNameInput.value = userProfileData.companyName || '';
                 messageEl.classList.add('hidden');
                 openModal(editProfileModal);
-            });
+            };
+
+            editProfileBtn.addEventListener('click', openEditModal);
+            editCompanyBtn.addEventListener('click', openEditModal);
 
             cancelBtn.addEventListener('click', () => closeModal(editProfileModal));
 
             editProfileForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const newName = nameInput.value.trim();
-                if (!newName || newName === userProfileData.displayName) {
+                const newCompanyName = companyNameInput.value.trim();
+                
+                const updateData = {};
+                if (newName && newName !== userProfileData.displayName) {
+                    updateData.displayName = newName;
+                }
+                if (newCompanyName && newCompanyName !== userProfileData.companyName) {
+                    updateData.companyName = newCompanyName;
+                }
+
+                if (Object.keys(updateData).length === 0) {
                     closeModal(editProfileModal);
                     return;
                 }
+
                 loader.classList.remove('hidden');
                 try {
-                    await db.collection('whitelisted_users').doc(user.email).update({ displayName: newName });
-                    userProfileData.displayName = newName;
-                    updateUserDisplayNameUI(newName);
+                    await db.collection('whitelisted_users').doc(user.email).update(updateData);
+                    
+                    if(updateData.displayName) {
+                        userProfileData.displayName = updateData.displayName;
+                        updateUserDisplayNameUI(updateData.displayName);
+                    }
+                    if(updateData.companyName) {
+                        userProfileData.companyName = updateData.companyName;
+                        updateCompanyNameUI(updateData.companyName);
+                    }
+                    
                     messageEl.textContent = translations[currentLanguage].profile_update_success;
-                    messageEl.className = 'text-sm bg-green-900/50 text-green-300 p-3 rounded-lg mb-4';
+                    messageEl.className = 'text-sm bg-green-900/50 text-green-300 p-3 rounded-lg mt-4';
                     messageEl.classList.remove('hidden');
                     setTimeout(() => { closeModal(editProfileModal); loader.classList.add('hidden'); }, 1500);
                 } catch (error) {
-                    console.error("Error updating profile name:", error);
+                    console.error("Error updating profile:", error);
                     messageEl.textContent = translations[currentLanguage].profile_update_error;
-                    messageEl.className = 'text-sm bg-red-900/50 text-red-300 p-3 rounded-lg mb-4';
+                    messageEl.className = 'text-sm bg-red-900/50 text-red-300 p-3 rounded-lg mt-4';
                     messageEl.classList.remove('hidden');
                     loader.classList.add('hidden');
                 }
