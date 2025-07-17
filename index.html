@@ -63,7 +63,6 @@
         #scroll-right-btn { right: -20px; }
         @media (min-width: 1024px) { .scroll-btn { display: flex; } }
         
-        /* Dropdown Styles */
         .dropdown { position: relative; display: inline-block; }
         .dropdown-content { display: none; position: absolute; right: 0; background-color: rgba(30, 41, 59, 0.9); backdrop-filter: blur(8px); min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-radius: 0.5rem; border: 1px solid rgba(255, 255, 255, 0.1); padding: 0.5rem 0; }
         .dropdown-content a { color: #E5E7EB; padding: 0.75rem 1rem; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; }
@@ -108,7 +107,6 @@
                 <label for="bg-upload-input" class="cursor-pointer bg-slate-700/50 hover:bg-slate-600/50 text-white p-2 rounded-full transition-colors" title="Ganti Latar Belakang"><i class="ph-bold ph-image"></i></label>
                 <input type="file" id="bg-upload-input" class="hidden" accept="image/*">
                 
-                <!-- PENAMBAHAN: Language Switcher Dropdown -->
                 <div class="dropdown">
                     <button class="bg-slate-700/50 hover:bg-slate-600/50 text-white p-2 rounded-full transition-colors" title="Ganti Bahasa"><i class="ph-bold ph-globe"></i></button>
                     <div id="language-dropdown" class="dropdown-content">
@@ -158,16 +156,15 @@
             </main>
             <main id="assets-view" class="main-view hidden flex-grow flex-col"><div class="mb-4 flex flex-col sm:flex-row gap-4"><div class="relative flex-grow"><input type="text" id="asset-search-input" data-translate-key="searchAssetPlaceholder" placeholder="Cari berdasarkan klien, proyek, atau tag..." class="w-full bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white focus:ring-2 focus:ring-teal-500 outline-none"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i></div></div><div id="assets-grid" class="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-y-auto custom-scrollbar pr-2"></div></main>
             <main id="invoice-view" class="main-view hidden flex-grow flex-col">
-                <!-- Konten Invoice (tidak diubah untuk brevity) -->
+                <!-- Konten Invoice akan ditambahkan di sini jika diperlukan -->
             </main>
             <main id="analytics-view" class="main-view hidden flex-grow flex-col">
-                <!-- Konten Analitik (tidak diubah untuk brevity) -->
+                <!-- Konten Analitik akan ditambahkan di sini jika diperlukan -->
             </main>
         </div>
     </div>
     
     <!-- Modals & Panels -->
-    <!-- PENAMBAHAN: Modal Edit Profil -->
     <div id="edit-profile-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden z-50">
         <div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-md transform scale-95 opacity-0">
             <form id="edit-profile-form">
@@ -187,7 +184,6 @@
         </div>
     </div>
 
-    <!-- PENAMBAHAN: Modal Pilihan Bahasa -->
     <div id="language-select-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden z-50">
         <div class="modal-panel glass-panel rounded-xl shadow-2xl p-8 w-full max-w-sm text-center transform scale-95 opacity-0">
             <i class="ph-bold ph-translate text-5xl text-indigo-400 mb-4"></i>
@@ -200,7 +196,6 @@
         </div>
     </div>
 
-    <!-- Modal lainnya tidak diubah -->
     <div id="onboarding-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0"><form id="onboarding-form"><h3 class="text-2xl font-bold mb-2 text-white">Selamat Datang!</h3><p class="text-gray-300 mb-6">Lengkapi profil Anda untuk mulai.</p><div class="space-y-4"><div><label for="profile-company-name" class="block text-sm font-medium text-gray-300">Nama Perusahaan/Komunitas</label><input type="text" id="profile-company-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="profile-field" class="block text-sm font-medium text-gray-300">Bergerak di Bidang</label><input type="text" id="profile-field" placeholder="cth: Video Editor, Agensi Kreatif" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="profile-contact" class="block text-sm font-medium text-gray-300">Kontak (Email/No. HP)</label><input type="text" id="profile-contact" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div></div><div class="flex justify-end gap-4 mt-8"><button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg flex items-center gap-2"><span>Simpan & Lanjutkan</span><div id="onboarding-loader" class="loader hidden"></div></button></div></form></div></div>
     <div id="task-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0"><form id="task-form"><input type="hidden" id="task-id"><h3 id="task-modal-title" class="text-2xl font-bold mb-6">Tambah Proyek Baru</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4"><div><label for="task-client-name" class="block text-sm font-medium text-gray-300 mb-1">Nama Klien</label><input type="text" id="task-client-name" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="task-project-type" class="block text-sm font-medium text-gray-300 mb-1">Jenis Proyek</label><input type="text" id="task-project-type" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="task-priority" class="block text-sm font-medium text-gray-300 mb-1">Prioritas</label><select id="task-priority" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"><option value="biasa">Biasa</option><option value="penting">Penting</option><option value="mendesak">Mendesak</option></select></div><div><label for="task-deadline" class="block text-sm font-medium text-gray-300 mb-1">Deadline</label><input type="date" id="task-deadline" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div class="sm:col-span-2"><label for="task-contact" class="block text-sm font-medium text-gray-300 mb-1">Kontak Klien</label><input type="text" id="task-contact" placeholder="Email atau No. HP" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div></div><div class="mb-6"><label for="brief" class="block text-sm font-medium text-gray-300 mb-1">Brief / Catatan</label><textarea id="brief" rows="3" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></textarea></div><div class="flex justify-end gap-4"><button type="button" id="cancel-task-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-lg">Batal</button><button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg">Simpan</button></div></form></div></div>
     <div id="delete-confirm-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-sm text-center transform scale-95 opacity-0"><h3 class="text-lg font-bold text-white mb-2">Yakin ingin menghapus?</h3><p id="delete-item-name" class="text-gray-300 mb-6"></p><div class="flex justify-center gap-4"><button id="cancel-delete-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-6 rounded-lg">Batal</button><button id="confirm-delete-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg">Hapus</button></div></div></div>
@@ -234,85 +229,23 @@
         let allTasksCache = [];
         let allAssetsCache = [];
         let unsubscribeComments = null;
-        let currentLanguage = 'id'; // Default ke Bahasa Indonesia
+        let currentLanguage = 'id';
+        let completedTasksChart = null;
+        let artistDistributionChart = null;
 
-        // PENAMBAHAN: Objek untuk terjemahan
         const translations = {
-            en: {
-                productName: "FocusCut",
-                loginSubtitle: "Sign in to continue to your dashboard.",
-                loginButton: "Sign in with Google",
-                loginFooter: "FocusCut Version 0.2",
-                loggedInAs: "Logged in as",
-                addProject: "Add Project",
-                addAsset: "Add Asset",
-                navProjectBoard: "Project Board",
-                navContentBank: "Content Bank",
-                navInvoice: "Invoice",
-                navAnalytics: "Analytics",
-                sortDateDesc: "Sort by: Date (Newest)",
-                sortDateAsc: "Sort by: Date (Oldest)",
-                sortNameAz: "Sort by: Client Name (A-Z)",
-                sortNameZa: "Sort by: Client Name (Z-A)",
-                colContentList: "Content List",
-                colEditing: "Editing Process",
-                colReview: "Review / Revision",
-                colDone: "Done",
-                editProfileTitle: "Edit Profile",
-                editProfileNameLabel: "Username",
-                cancelButton: "Cancel",
-                saveButton: "Save",
-                langModalTitle: "Choose Your Language",
-                langModalSubtitle: "You can change this later.",
-                langId: "Indonesian",
-                langEn: "English",
-                searchProjectPlaceholder: "Search by client, project, or date (YYYY-MM-DD)...",
-                searchAssetPlaceholder: "Search by client, project, or tags...",
-            },
-            id: {
-                productName: "FocusCut",
-                loginSubtitle: "Masuk untuk melanjutkan ke dasbor Anda.",
-                loginButton: "Masuk dengan Google",
-                loginFooter: "FocusCut Version 0.2",
-                loggedInAs: "Login sebagai",
-                addProject: "Tambah Proyek",
-                addAsset: "Tambah Aset",
-                navProjectBoard: "Papan Proyek",
-                navContentBank: "Bank Konten",
-                navInvoice: "Invoice",
-                navAnalytics: "Analitik",
-                sortDateDesc: "Urutkan: Tanggal (Terbaru)",
-                sortDateAsc: "Urutkan: Tanggal (Terlama)",
-                sortNameAz: "Urutkan: Nama Klien (A-Z)",
-                sortNameZa: "Urutkan: Nama Klien (Z-A)",
-                colContentList: "List Konten",
-                colEditing: "Proses Editing",
-                colReview: "Review / Revisi",
-                colDone: "Selesai",
-                editProfileTitle: "Edit Profil",
-                editProfileNameLabel: "Nama Pengguna",
-                cancelButton: "Batal",
-                saveButton: "Simpan",
-                langModalTitle: "Pilih Bahasa Anda",
-                langModalSubtitle: "Anda dapat mengubah ini nanti.",
-                langId: "Bahasa Indonesia",
-                langEn: "English",
-                searchProjectPlaceholder: "Cari nama klien, proyek, atau tanggal (YYYY-MM-DD)...",
-                searchAssetPlaceholder: "Cari berdasarkan klien, proyek, atau tag...",
-            }
+            en: { productName: "FocusCut", loginSubtitle: "Sign in to continue to your dashboard.", loginButton: "Sign in with Google", loginFooter: "FocusCut Version 0.2", loggedInAs: "Logged in as", addProject: "Add Project", addAsset: "Add Asset", navProjectBoard: "Project Board", navContentBank: "Content Bank", navInvoice: "Invoice", navAnalytics: "Analytics", sortDateDesc: "Sort by: Date (Newest)", sortDateAsc: "Sort by: Date (Oldest)", sortNameAz: "Sort by: Client Name (A-Z)", sortNameZa: "Sort by: Client Name (Z-A)", colContentList: "Content List", colEditing: "Editing Process", colReview: "Review / Revision", colDone: "Done", editProfileTitle: "Edit Profile", editProfileNameLabel: "Username", cancelButton: "Cancel", saveButton: "Save", langModalTitle: "Choose Your Language", langModalSubtitle: "You can change this later.", langId: "Indonesian", langEn: "English", searchProjectPlaceholder: "Search by client, project, or date (YYYY-MM-DD)...", searchAssetPlaceholder: "Search by client, project, or tags...", },
+            id: { productName: "FocusCut", loginSubtitle: "Masuk untuk melanjutkan ke dasbor Anda.", loginButton: "Masuk dengan Google", loginFooter: "FocusCut Version 0.2", loggedInAs: "Login sebagai", addProject: "Tambah Proyek", addAsset: "Tambah Aset", navProjectBoard: "Papan Proyek", navContentBank: "Bank Konten", navInvoice: "Invoice", navAnalytics: "Analitik", sortDateDesc: "Urutkan: Tanggal (Terbaru)", sortDateAsc: "Urutkan: Tanggal (Terlama)", sortNameAz: "Urutkan: Nama Klien (A-Z)", sortNameZa: "Urutkan: Nama Klien (Z-A)", colContentList: "List Konten", colEditing: "Proses Editing", colReview: "Review / Revisi", colDone: "Selesai", editProfileTitle: "Edit Profil", editProfileNameLabel: "Nama Pengguna", cancelButton: "Batal", saveButton: "Simpan", langModalTitle: "Pilih Bahasa Anda", langModalSubtitle: "Anda dapat mengubah ini nanti.", langId: "Bahasa Indonesia", langEn: "English", searchProjectPlaceholder: "Cari nama klien, proyek, atau tanggal (YYYY-MM-DD)...", searchAssetPlaceholder: "Cari berdasarkan klien, proyek, atau tag...", }
         };
 
-        // --- ELEMEN UTAMA ---
         const loginScreen = document.getElementById('login-screen');
         const appScreen = document.getElementById('app-screen');
         const googleLoginBtn = document.getElementById('google-login-btn');
         const loginErrorMsg = document.getElementById('login-error-message');
 
-        // --- FUNGSI MODAL HELPER ---
         const openModal = (modalElement) => { if (modalElement) { modalElement.classList.remove('hidden'); setTimeout(() => { if (modalElement.firstElementChild) modalElement.firstElementChild.classList.remove('scale-95', 'opacity-0'); }, 10); }};
         const closeModal = (modalElement) => { if (modalElement) { if (modalElement.firstElementChild) modalElement.firstElementChild.classList.add('scale-95', 'opacity-0'); setTimeout(() => modalElement.classList.add('hidden'), 300); }};
 
-        // --- LOGIKA OTENTIKASI (TIDAK DIUBAH) ---
         const provider = new firebase.auth.GoogleAuthProvider();
         googleLoginBtn.addEventListener('click', () => {
             auth.signInWithPopup(provider).catch((error) => {
@@ -349,12 +282,10 @@
             }
         });
 
-        // --- FUNGSI ALUR APLIKASI UTAMA ---
         function startAppFlow(user, profileData) {
             loginScreen.style.display = 'none';
             if (profileData && profileData.companyName) {
                 initializeAppUI(user, profileData);
-                // PENAMBAHAN: Cek bahasa setelah UI diinisialisasi
                 if (profileData.language) {
                     setLanguage(profileData.language);
                 } else {
@@ -367,7 +298,6 @@
             }
         }
         
-        // PENAMBAHAN: Fungsi untuk menerjemahkan UI
         function translateUI() {
             document.querySelectorAll('[data-translate-key]').forEach(el => {
                 const key = el.dataset.translateKey;
@@ -380,11 +310,9 @@
                     }
                 }
             });
-            // Update judul tab
             document.title = translations[currentLanguage].productName;
         }
 
-        // PENAMBAHAN: Fungsi untuk mengatur bahasa
         function setLanguage(lang) {
             currentLanguage = lang;
             if (currentUser) {
@@ -409,7 +337,6 @@
                     await db.collection('whitelisted_users').doc(user.email).update(newProfileData);
                     closeModal(document.getElementById('onboarding-modal'));
                     initializeAppUI(user, newProfileData);
-                    // PENAMBAHAN: Tampilkan pilihan bahasa setelah onboarding
                     openModal(document.getElementById('language-select-modal'));
                 } catch (error) {
                     console.error("Gagal memperbarui profil:", error);
@@ -417,7 +344,6 @@
             };
         }
 
-        // --- FUNGSI INISIALISASI UI UTAMA ---
         function initializeAppUI(user, profileData) {
             appScreen.style.display = 'flex';
             document.getElementById('company-name-display').textContent = profileData.companyName || 'Nama Perusahaan';
@@ -438,7 +364,6 @@
             setupTimer();
             setupTaskSearchAndSort();
             setupAssetSearch();
-            // PENAMBAHAN: Setup untuk fitur baru
             setupLanguageSwitcher();
             setupEditProfile(user, profileData);
             
@@ -446,7 +371,6 @@
             listenToAssets(user.uid);
         }
         
-        // --- PENAMBAHAN: Setup Fitur Edit Profil ---
         function setupEditProfile(user, profileData) {
             const editProfileModal = document.getElementById('edit-profile-modal');
             const editProfileBtn = document.getElementById('edit-profile-btn');
@@ -474,8 +398,8 @@
                 
                 try {
                     await db.collection('whitelisted_users').doc(user.email).update({ displayName: newName });
-                    userProfileData.displayName = newName; // Update local state
-                    document.getElementById('user-name-display').textContent = newName; // Update UI
+                    userProfileData.displayName = newName;
+                    document.getElementById('user-name-display').textContent = newName;
                     closeModal(editProfileModal);
                 } catch (error) {
                     console.error("Gagal update nama:", error);
@@ -485,19 +409,14 @@
             });
         }
 
-        // --- PENAMBAHAN: Setup Fitur Pilihan Bahasa ---
         function setupLanguageSwitcher() {
             const langModal = document.getElementById('language-select-modal');
-            
-            // Listener untuk tombol di modal
             document.querySelectorAll('.lang-selector-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     setLanguage(btn.dataset.lang);
                     closeModal(langModal);
                 });
             });
-
-            // Listener untuk dropdown di header
             document.querySelectorAll('.lang-switcher').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -506,42 +425,317 @@
             });
         }
 
-        // --- FUNGSI SEARCH & SORT (Tidak diubah) ---
-        function setupTaskSearchAndSort() { /* ... */ }
-        function filterAndSortTasks() { /* ... */ }
-        function setupAssetSearch() { /* ... */ }
-        function filterAssets() { /* ... */ }
+        function setupTaskSearchAndSort() {
+            const taskSearchInput = document.getElementById('task-search-input');
+            const taskSortSelect = document.getElementById('task-sort-select');
+            taskSearchInput.addEventListener('input', filterAndSortTasks);
+            taskSortSelect.addEventListener('change', filterAndSortTasks);
+        }
 
-        // --- FUNGSI RENDER & LISTENER (Tidak diubah) ---
-        function listenToTasks(uid) { /* ... */ }
-        function renderAllTasks(tasksToRender) { /* ... */ }
-        function listenToAssets(uid) { /* ... */ }
-        function renderAllAssets(assetsToRender) { /* ... */ }
-        
-        // --- FUNGSI LAINNYA (Tidak diubah, hanya memastikan terjemahan dipanggil) ---
-        function setupTimer() {
-            // ... (logika timer)
-            // Pastikan judul tab diupdate dengan bahasa yang benar
-            const updateTimerDisplay = () => {
-                // ...
-                const timeString = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-                timerDisplay.textContent = timeString;
-                const baseTitle = translations[currentLanguage].productName || 'FocusCut';
-                document.title = isTimerRunning ? `${timeString} - ${baseTitle}` : baseTitle;
-            };
-            // ...
+        function filterAndSortTasks() {
+            const taskSearchInput = document.getElementById('task-search-input');
+            const taskSortSelect = document.getElementById('task-sort-select');
+            const searchTerm = taskSearchInput.value.toLowerCase();
+            const sortBy = taskSortSelect.value;
+            let processedTasks = allTasksCache.filter(task => {
+                if (!searchTerm) return true;
+                const clientName = task.clientName?.toLowerCase() || '';
+                const projectType = task.projectType?.toLowerCase() || '';
+                const deadline = task.deadline || '';
+                return clientName.includes(searchTerm) || projectType.includes(searchTerm) || deadline.includes(searchTerm);
+            });
+            processedTasks.sort((a, b) => {
+                switch (sortBy) {
+                    case 'date_desc': return (b.createdAt?.toDate() || 0) - (a.createdAt?.toDate() || 0);
+                    case 'date_asc': return (a.createdAt?.toDate() || 0) - (b.createdAt?.toDate() || 0);
+                    case 'name_az': return (a.clientName || '').localeCompare(b.clientName || '');
+                    case 'name_za': return (b.clientName || '').localeCompare(a.clientName || '');
+                    default: return (b.createdAt?.toDate() || 0) - (a.createdAt?.toDate() || 0);
+                }
+            });
+            renderAllTasks(processedTasks);
         }
         
-        // Sisa fungsi tidak perlu diubah secara signifikan
-        function setupKanbanInteractions(user, profileData) { /* ... */ }
-        function setupAssetInteractions() { /* ... */ }
-        function setupCommentSubmission(user, profileData) { /* ... */ }
-        function setupModals(user) { /* ... */ }
-        function setupNavigation() { /* ... */ }
-        function setupProfilePicUpload(user, profileData) { /* ... */ }
-        function setupBgUpload(user) { /* ... */ }
+        function setupAssetSearch() {
+            const assetSearchInput = document.getElementById('asset-search-input');
+            assetSearchInput.addEventListener('input', filterAssets);
+        }
 
-        // Panggil terjemahan awal saat load, untuk halaman login
+        function filterAssets() {
+            const assetSearchInput = document.getElementById('asset-search-input');
+            const searchTerm = assetSearchInput.value.toLowerCase();
+            const filteredAssets = allAssetsCache.filter(asset => {
+                if (!searchTerm) return true;
+                const clientName = asset.clientName?.toLowerCase() || '';
+                const projectType = asset.projectType?.toLowerCase() || '';
+                const tags = (asset.tags || []).join(' ').toLowerCase();
+                return clientName.includes(searchTerm) || projectType.includes(searchTerm) || tags.includes(searchTerm);
+            });
+            renderAllAssets(filteredAssets);
+        }
+
+        function listenToTasks(uid) {
+            db.collection('tasks').where('ownerId', '==', uid).onSnapshot(snapshot => {
+                allTasksCache = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                filterAndSortTasks();
+                // updateAnalytics(allTasksCache); 
+            }, error => console.error("Error mendengarkan perubahan proyek:", error));
+        }
+        
+        function renderAllTasks(tasksToRender) {
+            const columns = { todo: document.getElementById('todo-column'), wip: document.getElementById('wip-column'), review: document.getElementById('review-column'), done: document.getElementById('done-column') };
+            const counts = { todo: 0, wip: 0, review: 0, done: 0 };
+            Object.values(columns).forEach(col => col.innerHTML = '');
+            tasksToRender.forEach(task => {
+                if (columns[task.status]) {
+                    const taskCard = document.createElement('div');
+                    taskCard.className = `task-card glass-card p-4 rounded-lg mb-4 border-l-4 priority-${task.priority}`;
+                    taskCard.dataset.id = task.id;
+                    taskCard.setAttribute('draggable', 'true');
+                    taskCard.innerHTML = `<div class="card-actions"><button class="action-btn comment-task-btn" title="Komentar" data-id="${task.id}"><i class="ph-bold ph-chat-circle-dots text-sm"></i></button><button class="action-btn delete-task-btn" title="Hapus Proyek" data-id="${task.id}"><i class="ph-bold ph-trash text-sm"></i></button></div><h4 class="font-bold text-white pr-16">${task.clientName}</h4><p class="text-sm text-gray-300 mb-2">${task.projectType}</p><p class="text-xs text-gray-400 mb-3 break-words">${task.brief || ''}</p><div class="flex justify-between items-center text-xs text-gray-400"><span><i class="ph-fill ph-calendar-blank mr-1"></i>${task.deadline || 'No date'}</span><span class="font-bold uppercase text-indigo-300">${task.priority}</span></div>`;
+                    columns[task.status].appendChild(taskCard);
+                    counts[task.status]++;
+                }
+            });
+            document.getElementById('todo-count').textContent = counts.todo;
+            document.getElementById('wip-count').textContent = counts.wip;
+            document.getElementById('review-count').textContent = counts.review;
+            document.getElementById('done-count').textContent = counts.done;
+            setTimeout(() => document.getElementById('kanban-scroll-wrapper')?.dispatchEvent(new Event('scroll')), 100);
+        }
+        
+        function listenToAssets(uid) {
+            db.collection('assets').where('ownerId', '==', uid).onSnapshot(snapshot => {
+                allAssetsCache = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                filterAssets();
+            }, error => console.error("Error mendengarkan perubahan aset:", error));
+        }
+
+        function renderAllAssets(assetsToRender) {
+            const grid = document.getElementById('assets-grid');
+            grid.innerHTML = '';
+            if (assetsToRender.length === 0) {
+                grid.innerHTML = `<p class="text-center text-gray-400 col-span-full mt-8">Aset tidak ditemukan.</p>`;
+                return;
+            }
+            assetsToRender.forEach(asset => {
+                const assetCard = document.createElement('a');
+                assetCard.href = asset.fileLink;
+                assetCard.target = "_blank";
+                assetCard.className = 'glass-card p-4 rounded-lg block';
+                assetCard.innerHTML = `<div class="card-actions"><button class="action-btn delete-asset-btn" title="Hapus Aset" data-id="${asset.id}"><i class="ph-bold ph-trash text-sm"></i></button></div><h4 class="font-bold text-white truncate pr-8">${asset.clientName}</h4><p class="text-sm text-gray-300 mb-2">${asset.projectType}</p><div class="flex flex-wrap gap-1 mt-2">${(asset.tags || []).map(tag => `<span class="text-xs bg-teal-800 text-teal-200 px-2 py-1 rounded-full">${tag}</span>`).join('')}</div><p class="text-xs text-gray-400 mt-3">Tgl Syuting: ${asset.shootDate}</p>`;
+                grid.appendChild(assetCard);
+            });
+        }
+        
+        function setupTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            const startTimerBtn = document.getElementById('start-timer-btn');
+            const timerProgress = document.getElementById('timer-progress');
+            const pauseTimerBtn = document.getElementById('pause-timer-btn');
+            const resetTimerBtn = document.getElementById('reset-timer-btn');
+            let timerInterval = null;
+            const FOCUS_TIME = 30 * 60;
+            let remainingSeconds = FOCUS_TIME;
+            let isTimerRunning = false;
+            const updateTimerDisplay = () => { const minutes = Math.floor(remainingSeconds / 60); const seconds = remainingSeconds % 60; const timeString = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`; timerDisplay.textContent = timeString; const baseTitle = translations[currentLanguage].productName || 'FocusCut'; document.title = isTimerRunning ? `${timeString} - ${baseTitle}` : baseTitle; };
+            const updateProgressBar = () => { if(timerProgress) timerProgress.style.width = `${(remainingSeconds / FOCUS_TIME) * 100}%`; };
+            const startTimer = () => { if (isTimerRunning) return; isTimerRunning = true; startTimerBtn.classList.add('hidden'); pauseTimerBtn.classList.remove('hidden'); timerInterval = setInterval(() => { remainingSeconds--; updateTimerDisplay(); updateProgressBar(); if (remainingSeconds <= 0) { clearInterval(timerInterval); isTimerRunning = false; openModal(document.getElementById('timer-alert-modal')); resetTimer(); } }, 1000); };
+            const pauseTimer = () => { isTimerRunning = false; clearInterval(timerInterval); startTimerBtn.classList.remove('hidden'); pauseTimerBtn.classList.add('hidden'); updateTimerDisplay(); };
+            const resetTimer = () => { pauseTimer(); remainingSeconds = FOCUS_TIME; updateTimerDisplay(); updateProgressBar(); };
+            startTimerBtn.addEventListener('click', startTimer);
+            pauseTimerBtn.addEventListener('click', pauseTimer);
+            resetTimerBtn.addEventListener('click', resetTimer);
+            document.getElementById('ok-timer-alert-btn')?.addEventListener('click', () => closeModal(document.getElementById('timer-alert-modal')));
+            updateTimerDisplay();
+        };
+
+        function setupKanbanInteractions(user, profileData) {
+            const kanbanBoard = document.getElementById('kanban-board');
+            kanbanBoard.addEventListener('click', e => {
+                const deleteBtn = e.target.closest('.delete-task-btn');
+                const commentBtn = e.target.closest('.comment-task-btn');
+                if (deleteBtn) { const taskId = deleteBtn.dataset.id; const taskName = allTasksCache.find(t => t.id === taskId)?.clientName || 'proyek ini'; openDeleteConfirmation(taskId, taskName, 'task'); }
+                if (commentBtn) { const taskId = commentBtn.dataset.id; const taskTitle = allTasksCache.find(t => t.id === taskId)?.clientName || 'Proyek'; openCommentsPanel(taskId, taskTitle); }
+            });
+            const scrollWrapper = document.getElementById('kanban-scroll-wrapper');
+            const scrollLeftBtn = document.getElementById('scroll-left-btn');
+            const scrollRightBtn = document.getElementById('scroll-right-btn');
+            const checkScroll = () => { if (!scrollWrapper) return; const maxScrollLeft = scrollWrapper.scrollWidth - scrollWrapper.clientWidth; scrollLeftBtn.style.display = scrollWrapper.scrollLeft > 0 ? 'flex' : 'none'; scrollRightBtn.style.display = scrollWrapper.scrollLeft < maxScrollLeft - 1 ? 'flex' : 'none'; };
+            scrollLeftBtn.addEventListener('click', () => { scrollWrapper.scrollBy({ left: -350, behavior: 'smooth' }); });
+            scrollRightBtn.addEventListener('click', () => { scrollWrapper.scrollBy({ left: 350, behavior: 'smooth' }); });
+            scrollWrapper.addEventListener('scroll', checkScroll);
+            window.addEventListener('resize', checkScroll);
+            setTimeout(checkScroll, 500);
+            let draggedItemId = null;
+            kanbanBoard.addEventListener('dragstart', e => { const target = e.target.closest('.task-card'); if (target) { draggedItemId = target.dataset.id; e.dataTransfer.setData('text/plain', draggedItemId); setTimeout(() => target.classList.add('dragging'), 0); } });
+            kanbanBoard.addEventListener('dragend', e => { const target = e.target.closest('.task-card'); if (target) target.classList.remove('dragging'); draggedItemId = null; });
+            document.querySelectorAll('.task-column').forEach(column => {
+                column.addEventListener('dragover', e => { e.preventDefault(); column.classList.add('drag-over'); });
+                column.addEventListener('dragleave', () => column.classList.remove('drag-over'));
+                column.addEventListener('drop', e => {
+                    e.preventDefault();
+                    column.classList.remove('drag-over');
+                    const newStatus = column.dataset.status;
+                    const droppedItemId = e.dataTransfer.getData('text/plain');
+                    if (droppedItemId && newStatus) {
+                        const taskRef = db.collection('tasks').doc(droppedItemId);
+                        const updateData = { status: newStatus };
+                        if (newStatus === 'done') { updateData.completedAt = firebase.firestore.FieldValue.serverTimestamp(); }
+                        taskRef.update(updateData).catch(err => console.error("Gagal update status:", err));
+                    }
+                });
+            });
+        }
+        function setupAssetInteractions() {
+            const assetsGrid = document.getElementById('assets-grid');
+            assetsGrid.addEventListener('click', e => {
+                const deleteBtn = e.target.closest('.delete-asset-btn');
+                if (deleteBtn) { e.preventDefault(); const assetId = deleteBtn.dataset.id; const assetName = allAssetsCache.find(a => a.id === assetId)?.clientName || 'aset ini'; openDeleteConfirmation(assetId, assetName, 'asset'); }
+            });
+        }
+        function openDeleteConfirmation(itemId, itemName, itemType) {
+            const deleteConfirmModal = document.getElementById('delete-confirm-modal');
+            document.getElementById('delete-item-name').textContent = `"${itemName}" akan dihapus permanen.`;
+            const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+            const newConfirmBtn = confirmDeleteBtn.cloneNode(true);
+            confirmDeleteBtn.parentNode.replaceChild(newConfirmBtn, confirmDeleteBtn);
+            newConfirmBtn.addEventListener('click', () => {
+                const collectionName = itemType === 'task' ? 'tasks' : 'assets';
+                db.collection(collectionName).doc(itemId).delete().catch(err => console.error(`Gagal menghapus ${itemType}:`, err));
+                closeModal(deleteConfirmModal);
+            });
+            document.getElementById('cancel-delete-btn').onclick = () => closeModal(deleteConfirmModal);
+            openModal(deleteConfirmModal);
+        }
+        function setupCommentSubmission(user, profileData) {
+            const form = document.getElementById('comment-form');
+            const newForm = form.cloneNode(true);
+            form.parentNode.replaceChild(newForm, form);
+            newForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const taskId = newForm.dataset.taskId;
+                if (!taskId) { console.error("ID Proyek tidak ditemukan untuk mengirim komentar."); return; }
+                const input = document.getElementById('comment-input');
+                const text = input.value.trim();
+                if (!text) return;
+                const commentData = { text: text, authorId: user.uid, authorName: profileData.displayName || user.displayName, authorPhotoURL: profileData.photoURL || user.photoURL, createdAt: firebase.firestore.FieldValue.serverTimestamp() };
+                db.collection('tasks').doc(taskId).collection('comments').add(commentData) .then(() => { input.value = ''; }) .catch(err => { console.error("Gagal mengirim komentar:", err); alert("Gagal mengirim komentar. Pastikan aturan keamanan Firebase sudah benar."); });
+            });
+        }
+        function openCommentsPanel(taskId, taskTitle) {
+            const panel = document.getElementById('comments-panel');
+            const overlay = document.getElementById('comments-panel-overlay');
+            const titleEl = document.getElementById('comments-task-title');
+            const form = document.getElementById('comment-form');
+            titleEl.textContent = `Catatan untuk: ${taskTitle}`;
+            form.dataset.taskId = taskId;
+            if (unsubscribeComments) unsubscribeComments();
+            document.body.classList.add('comments-open');
+            overlay.classList.remove('hidden');
+            panel.classList.remove('translate-x-full');
+            listenToComments(taskId);
+        }
+        function closeCommentsPanel() {
+            if (unsubscribeComments) { unsubscribeComments(); unsubscribeComments = null; }
+            document.body.classList.remove('comments-open');
+            document.getElementById('comments-panel-overlay').classList.add('hidden');
+            document.getElementById('comments-panel').classList.add('translate-x-full');
+            document.getElementById('comment-form').removeAttribute('data-task-id');
+        }
+        document.getElementById('close-comments-btn').addEventListener('click', closeCommentsPanel);
+        document.getElementById('comments-panel-overlay').addEventListener('click', closeCommentsPanel);
+        function listenToComments(taskId) {
+            const commentsList = document.getElementById('comments-list');
+            const commentsPath = db.collection('tasks').doc(taskId).collection('comments').orderBy('createdAt', 'asc');
+            unsubscribeComments = commentsPath.onSnapshot(snapshot => {
+                commentsList.innerHTML = '';
+                if (snapshot.empty) { commentsList.innerHTML = `<p class="text-center text-gray-400 mt-4">Belum ada komentar.</p>`; return; }
+                snapshot.forEach(doc => {
+                    const comment = doc.data();
+                    const commentEl = document.createElement('div');
+                    commentEl.className = 'flex items-start gap-3 mb-4';
+                    const commentDate = comment.createdAt?.toDate().toLocaleString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) || 'Baru saja';
+                    commentEl.innerHTML = `<img src="${comment.authorPhotoURL || 'https://placehold.co/40x40'}" class="w-8 h-8 rounded-full object-cover mt-1"><div class="flex-1 bg-slate-700/50 rounded-lg p-3"><div class="flex justify-between items-center mb-1"><span class="font-semibold text-white text-sm">${comment.authorName}</span><span class="text-xs text-gray-400">${commentDate}</span></div><p class="text-sm text-gray-200 whitespace-pre-wrap">${comment.text}</p></div>`;
+                    commentsList.appendChild(commentEl);
+                });
+                commentsList.scrollTop = commentsList.scrollHeight;
+            }, err => { console.error("Gagal memuat komentar:", err); commentsList.innerHTML = `<p class="text-center text-red-400 mt-4">Gagal memuat komentar.</p>`; });
+        }
+        
+        function setupModals(user) {
+            const taskModal = document.getElementById('task-modal');
+            const assetModal = document.getElementById('asset-modal');
+            const taskForm = document.getElementById('task-form');
+            const assetForm = document.getElementById('asset-form');
+            document.getElementById('add-task-btn').addEventListener('click', () => openModal(taskModal));
+            document.getElementById('add-asset-btn').addEventListener('click', () => openModal(assetModal));
+            document.getElementById('cancel-task-btn').addEventListener('click', () => closeModal(taskModal));
+            document.getElementById('cancel-asset-btn').addEventListener('click', () => closeModal(assetModal));
+            taskForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const taskData = { clientName: document.getElementById('task-client-name').value, projectType: document.getElementById('task-project-type').value, priority: document.getElementById('task-priority').value, deadline: document.getElementById('task-deadline').value, contact: document.getElementById('task-contact').value, brief: document.getElementById('brief').value, status: 'todo', ownerId: user.uid, createdAt: firebase.firestore.FieldValue.serverTimestamp() };
+                db.collection('tasks').add(taskData).then(() => { taskForm.reset(); closeModal(taskModal); }).catch(error => console.error("Error menyimpan proyek:", error));
+            });
+            assetForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const assetData = { fileLink: document.getElementById('asset-file-link').value, clientName: document.getElementById('asset-client-name').value, projectType: document.getElementById('asset-project-type').value, shootDate: document.getElementById('asset-shoot-date').value, assetType: document.getElementById('asset-type').value, tags: document.getElementById('asset-tags').value.split(',').map(tag => tag.trim()), ownerId: user.uid, createdAt: firebase.firestore.FieldValue.serverTimestamp() };
+                db.collection('assets').add(assetData).then(() => { assetForm.reset(); closeModal(assetModal); }).catch(error => console.error("Error menyimpan aset:", error));
+            });
+        }
+        function setupNavigation() {
+            const navButtons = document.querySelectorAll('nav .nav-btn');
+            const mainViews = document.querySelectorAll('.main-view');
+            const mainActions = { 'kanban-view': document.getElementById('add-task-btn'), 'assets-view': document.getElementById('add-asset-btn'), };
+            function handleNavigation(targetViewId) {
+                mainViews.forEach(view => view.classList.add('hidden'));
+                document.getElementById(targetViewId).classList.remove('hidden');
+                navButtons.forEach(btn => { btn.classList.toggle('nav-btn-active', btn.dataset.view === targetViewId); });
+                Object.values(mainActions).forEach(btn => btn && btn.classList.add('hidden'));
+                if (mainActions[targetViewId]) { mainActions[targetViewId].classList.remove('hidden'); }
+            }
+            navButtons.forEach(button => { button.addEventListener('click', () => handleNavigation(button.dataset.view)); });
+            handleNavigation('kanban-view');
+        }
+        function setupProfilePicUpload(user, profileData) {
+            const profilePicInput = document.getElementById('profile-pic-input');
+            const profilePicLoader = document.getElementById('profile-pic-loader');
+            const profilePic = document.getElementById('profile-pic');
+            profilePicInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                profilePicLoader.classList.remove('hidden');
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const base64String = reader.result;
+                    db.collection('whitelisted_users').doc(user.email).update({ photoURL: base64String })
+                    .then(() => {
+                        profilePic.src = base64String;
+                        profileData.photoURL = base64String;
+                        profilePicLoader.classList.add('hidden');
+                    }).catch(error => {
+                        profilePicLoader.classList.add('hidden');
+                        console.error("Gagal update foto:", error);
+                    });
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        function setupBgUpload(user) {
+            const bgUploadInput = document.getElementById('bg-upload-input');
+            bgUploadInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const backgroundURL = event.target.result;
+                    document.body.style.backgroundImage = `url(${backgroundURL})`;
+                    db.collection('whitelisted_users').doc(user.email).update({ backgroundURL: backgroundURL });
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
         translateUI();
     });
     </script>
