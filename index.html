@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Editor Pro</title>
+    <title>FocusCut</title>
     
+    <link rel="icon" href="https://i.imgur.com/2z2b0so.jpeg" type="image/jpeg" />
+
     <!-- External Libraries & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,46 +57,13 @@
         .task-card.dragging { opacity: 0.5; transform: scale(1.05); box-shadow: 0 20px 30px rgba(0,0,0,0.3); cursor: grabbing; }
         .task-card { cursor: grab; }
 
-        /* REVISI: Style untuk scroll container dan tombol navigasi */
-        .kanban-scroll-container {
-            position: relative;
-        }
-        .kanban-scroll-wrapper {
-            overflow-x: auto;
-            padding-bottom: 1rem; /* Ruang untuk scrollbar */
-        }
-        .scroll-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(4px);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 9999px;
-            width: 40px;
-            height: 40px;
-            display: none; /* Sembunyikan di mobile */
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            z-index: 20;
-        }
-        .scroll-btn:hover {
-            background-color: #4f46e5;
-        }
-        #scroll-left-btn {
-            left: -20px;
-        }
-        #scroll-right-btn {
-            right: -20px;
-        }
-        @media (min-width: 1024px) {
-            .scroll-btn {
-                display: flex;
-            }
-        }
+        .kanban-scroll-container { position: relative; }
+        .kanban-scroll-wrapper { overflow-x: auto; padding-bottom: 1rem; }
+        .scroll-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); color: white; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 9999px; width: 40px; height: 40px; display: none; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; z-index: 20; }
+        .scroll-btn:hover { background-color: #4f46e5; }
+        #scroll-left-btn { left: -20px; }
+        #scroll-right-btn { right: -20px; }
+        @media (min-width: 1024px) { .scroll-btn { display: flex; } }
     </style>
 </head>
 <body class="text-white">
@@ -102,16 +71,17 @@
     <!-- Login Screen -->
     <div id="login-screen" class="min-h-screen flex items-center justify-center p-4">
         <div class="glass-panel rounded-2xl p-8 text-center max-w-md w-full">
-            <div class="w-24 h-24 rounded-full border-2 border-white/20 flex items-center justify-center bg-slate-700/50 mx-auto mb-4"><i class="ph-bold ph-video text-5xl text-indigo-400"></i></div>
-            <h1 class="text-3xl font-bold text-white mb-2">Dashboard Editor Pro</h1>
-            <p class="text-gray-300 mb-6">Masuk untuk melanjutkan ke dasbor Anda.</p>
+            <!-- REVISI: Logo Baru & Bentuk Lingkaran -->
+            <img src="https://i.imgur.com/2z2b0so.jpeg" alt="FocusCut Logo" class="w-28 h-28 mx-auto mb-4 rounded-full object-cover">
+            <!-- REVISI: Nama Brand Baru -->
+            <h1 class="text-3xl font-bold text-white mb-2" data-translate-key="login_title">FocusCut</h1>
+            <p class="text-gray-300 mb-6" data-translate-key="login_subtitle">Masuk untuk melanjutkan ke dasbor Anda.</p>
             <div id="login-error-message" class="hidden text-left text-sm bg-red-900/50 text-red-300 p-3 rounded-lg mb-4"></div>
             <button id="google-login-btn" class="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-200 text-gray-800 font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-300">
                 <svg class="w-6 h-6" viewBox="0 0 48 48"><path fill="#4285F4" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#34A853" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l5.657,5.657C40.074,36.938,44,31.016,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FBBC05" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#EA4335" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="none" d="M6,13.5l6,5l6-5L12,2z"></path></svg>
-                <span>Masuk dengan Google</span>
+                <span data-translate-key="login_btn">Masuk dengan Google</span>
             </button>
-            <!-- REVISI: Watermark Versi Aplikasi -->
-            <p class="text-xs text-gray-500 mt-8">Version 0.1</p>
+            <p class="text-xs text-gray-500 mt-8" data-translate-key="app_version">FocusCut Version 0.2</p>
         </div>
     </div>
 
@@ -128,44 +98,41 @@
                 </label>
                 <input type="file" id="profile-pic-input" class="hidden" accept="image/*">
                 <div>
-                    <h1 id="company-name-display" class="text-xl sm:text-2xl font-bold text-white">Nama Perusahaan</h1>
-                    <p id="user-info" class="text-sm text-gray-300">Login sebagai: <span id="user-name-display"></span></p>
+                    <h1 id="company-name-display" class="text-xl sm:text-2xl font-bold text-white" data-translate-key="company_name_placeholder">FocusCut</h1>
+                    <p id="user-info" class="text-sm text-gray-300"><span data-translate-key="logged_in_as">Login sebagai:</span> <span id="user-name-display"></span></p>
                 </div>
             </div>
-            <div class="flex items-center gap-4 mt-4 sm:mt-0 w-full sm:w-auto justify-end">
-                <label for="bg-upload-input" class="cursor-pointer bg-slate-700/50 hover:bg-slate-600/50 text-white p-2 rounded-full transition-colors" title="Ganti Latar Belakang"><i class="ph-bold ph-image"></i></label>
-                <input type="file" id="bg-upload-input" class="hidden" accept="image/*">
-                <div id="presence-indicators" class="flex items-center -space-x-2"></div>
+            <div class="flex items-center gap-2 mt-4 sm:mt-0 w-full sm:w-auto justify-end">
+                <button id="settings-btn" class="bg-slate-700/50 hover:bg-slate-600/50 text-white p-2 rounded-full transition-colors" title="Pengaturan"><i class="ph-bold ph-gear"></i></button>
                 <button id="logout-btn" class="bg-red-600/80 hover:bg-red-700/80 text-white p-2 rounded-full transition-colors" title="Keluar"><i class="ph-bold ph-sign-out"></i></button>
                 <div id="main-actions">
-                    <button id="add-task-btn" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300"><i class="ph-bold ph-plus-circle text-xl"></i><span>Tambah Proyek</span></button>
-                    <button id="add-asset-btn" class="hidden items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300"><i class="ph-bold ph-archive text-xl"></i><span>Tambah Aset</span></button>
+                    <button id="add-task-btn" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300"><i class="ph-bold ph-plus-circle text-xl"></i><span data-translate-key="add_project_btn">Tambah Proyek</span></button>
+                    <button id="add-asset-btn" class="hidden items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300"><i class="ph-bold ph-archive text-xl"></i><span data-translate-key="add_asset_btn">Tambah Aset</span></button>
                 </div>
             </div>
         </header>
 
         <nav class="flex space-x-2 mb-6 overflow-x-auto custom-scrollbar pb-2">
-            <button id="nav-kanban" data-view="kanban-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-columns mr-1"></i> Papan Proyek</button>
-            <button id="nav-assets" data-view="assets-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-database mr-1"></i> Bank Konten</button>
-            <button id="nav-invoice" data-view="invoice-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-receipt mr-1"></i> Invoice</button>
-            <button id="nav-analytics" data-view="analytics-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-chart-bar mr-1"></i> Analitik</button>
+            <button id="nav-kanban" data-view="kanban-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-columns mr-1"></i> <span data-translate-key="nav_kanban">Papan Proyek</span></button>
+            <button id="nav-assets" data-view="assets-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-database mr-1"></i> <span data-translate-key="nav_assets">Bank Konten</span></button>
+            <button id="nav-invoice" data-view="invoice-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-receipt mr-1"></i> <span data-translate-key="nav_invoice">Invoice</span></button>
+            <button id="nav-analytics" data-view="analytics-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-chart-bar mr-1"></i> <span data-translate-key="nav_analytics">Analitik</span></button>
         </nav>
 
         <div class="flex-grow flex flex-col">
             <main id="kanban-view" class="main-view flex flex-col flex-grow">
                  <div class="flex flex-col md:flex-row gap-4 mb-6">
-                    <div class="relative flex-grow"><input type="text" id="task-search-input" placeholder="Cari proyek..." class="w-full bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i></div>
-                    <div class="relative"><select id="task-sort-select" class="w-full md:w-auto appearance-none bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg pl-4 pr-10 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none"><option value="terbaru">Urutkan: Terbaru</option><option value="deadline">Urutkan: Deadline Terdekat</option><option value="prioritas">Urutkan: Prioritas Tertinggi</option></select><i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i></div>
+                    <div class="relative flex-grow"><input type="text" id="task-search-input" placeholder="Cari proyek..." data-translate-key="search_placeholder" class="w-full bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i></div>
+                    <div class="relative"><select id="task-sort-select" class="w-full md:w-auto appearance-none bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg pl-4 pr-10 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none"><option value="terbaru" data-translate-key="sort_newest">Urutkan: Terbaru</option><option value="deadline" data-translate-key="sort_deadline">Urutkan: Deadline Terdekat</option><option value="prioritas" data-translate-key="sort_priority">Urutkan: Prioritas Tertinggi</option></select><i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i></div>
                 </div>
-                <!-- REVISI: Container untuk scroll horizontal -->
                 <div class="flex-grow kanban-scroll-container">
                     <button id="scroll-left-btn" class="scroll-btn"><i class="ph-bold ph-caret-left text-2xl"></i></button>
                     <div id="kanban-scroll-wrapper" class="kanban-scroll-wrapper custom-scrollbar">
                         <div id="kanban-board" class="flex flex-row gap-6 pb-4 min-w-max">
-                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-cyan-300"><span><i class="ph-fill ph-list-bullets mr-2"></i>List Konten</span><span id="todo-count" class="bg-cyan-800 text-cyan-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="todo-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="todo"></div></div>
-                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-amber-300"><span><i class="ph-fill ph-person-simple-run mr-2"></i>Proses Editing</span><span id="wip-count" class="bg-amber-800 text-amber-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="wip-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="wip"></div></div>
-                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-purple-300"><span><i class="ph-fill ph-eye mr-2"></i>Review / Revisi</span><span id="review-count" class="bg-purple-800 text-purple-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="review-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="review"></div></div>
-                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-emerald-300"><span><i class="ph-fill ph-check-circle mr-2"></i>Selesai</span><span id="done-count" class="bg-emerald-800 text-emerald-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="done-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="done"></div></div>
+                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-cyan-300"><span><i class="ph-fill ph-list-bullets mr-2"></i><span data-translate-key="col_todo">List Konten</span></span><span id="todo-count" class="bg-cyan-800 text-cyan-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="todo-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="todo"></div></div>
+                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-amber-300"><span><i class="ph-fill ph-person-simple-run mr-2"></i><span data-translate-key="col_wip">Proses Editing</span></span><span id="wip-count" class="bg-amber-800 text-amber-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="wip-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="wip"></div></div>
+                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-purple-300"><span><i class="ph-fill ph-eye mr-2"></i><span data-translate-key="col_review">Review / Revisi</span></span><span id="review-count" class="bg-purple-800 text-purple-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="review-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="review"></div></div>
+                            <div class="glass-panel rounded-xl p-4 flex flex-col w-80 sm:w-96 flex-shrink-0"><h2 class="text-lg font-semibold mb-4 flex justify-between items-center text-emerald-300"><span><i class="ph-fill ph-check-circle mr-2"></i><span data-translate-key="col_done">Selesai</span></span><span id="done-count" class="bg-emerald-800 text-emerald-200 text-xs font-bold px-2 py-1 rounded-full">0</span></h2><div id="done-column" class="task-column flex-grow overflow-y-auto custom-scrollbar pr-1 min-h-[200px]" data-status="done"></div></div>
                         </div>
                     </div>
                     <button id="scroll-right-btn" class="scroll-btn"><i class="ph-bold ph-caret-right text-2xl"></i></button>
@@ -174,30 +141,23 @@
             <main id="assets-view" class="main-view hidden flex-grow flex-col"><div class="mb-4 flex flex-col sm:flex-row gap-4"><div class="relative flex-grow"><input type="text" id="asset-search-input" placeholder="Cari berdasarkan klien, proyek, atau tag..." class="w-full bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white focus:ring-2 focus:ring-teal-500 outline-none"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i></div></div><div id="assets-grid" class="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-y-auto custom-scrollbar pr-2"></div></main>
             <main id="invoice-view" class="main-view hidden flex-grow flex-col">
                 <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                    <!-- Kolom Form Invoice -->
                     <div class="lg:col-span-2">
                         <form id="invoice-form" class="glass-panel rounded-xl p-6 space-y-4">
-                            <h3 class="text-xl font-bold text-white border-b border-white/10 pb-3">Buat Invoice</h3>
-                            
-                            <!-- Informasi Klien -->
+                            <h3 class="text-xl font-bold text-white border-b border-white/10 pb-3" data-translate-key="invoice_create_title">Buat Invoice</h3>
                             <div class="space-y-2">
-                                <h4 class="text-md font-semibold text-gray-300">Informasi Klien</h4>
-                                <div><label for="invoice-client-name" class="block text-sm font-medium text-gray-400">Nama Klien</label><input type="text" id="invoice-client-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div>
-                                <div><label for="invoice-client-email" class="block text-sm font-medium text-gray-400">Email Klien</label><input type="email" id="invoice-client-email" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div>
-                                <div><label for="invoice-due-date" class="block text-sm font-medium text-gray-400">Tanggal Jatuh Tempo</label><input type="date" id="invoice-due-date" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div>
+                                <h4 class="text-md font-semibold text-gray-300" data-translate-key="invoice_client_info">Informasi Klien</h4>
+                                <div><label for="invoice-client-name" class="block text-sm font-medium text-gray-400" data-translate-key="invoice_client_name">Nama Klien</label><input type="text" id="invoice-client-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div>
+                                <div><label for="invoice-client-email" class="block text-sm font-medium text-gray-400" data-translate-key="invoice_client_email">Email Klien</label><input type="email" id="invoice-client-email" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div>
+                                <div><label for="invoice-due-date" class="block text-sm font-medium text-gray-400" data-translate-key="invoice_due_date">Tanggal Jatuh Tempo</label><input type="date" id="invoice-due-date" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div>
                             </div>
-
-                            <!-- Item Invoice -->
                             <div class="space-y-2 pt-4 border-t border-white/10">
-                                <h4 class="text-md font-semibold text-gray-300">Item Tagihan</h4>
+                                <h4 class="text-md font-semibold text-gray-300" data-translate-key="invoice_items">Item Tagihan</h4>
                                 <div id="invoice-items-container" class="space-y-2"></div>
-                                <button type="button" id="add-invoice-item-btn" class="w-full text-sm bg-slate-600/50 hover:bg-slate-500/50 py-2 rounded-lg">+ Tambah Item</button>
+                                <button type="button" id="add-invoice-item-btn" class="w-full text-sm bg-slate-600/50 hover:bg-slate-500/50 py-2 rounded-lg" data-translate-key="invoice_add_item_btn">+ Tambah Item</button>
                             </div>
-
-                            <!-- Informasi Pembayaran -->
                             <div class="space-y-2 pt-4 border-t border-white/10">
-                                <h4 class="text-md font-semibold text-gray-300">Informasi Pembayaran</h4>
-                                <div><label for="invoice-bank-name" class="block text-sm font-medium text-gray-400">Nama Bank</label>
+                                <h4 class="text-md font-semibold text-gray-300" data-translate-key="invoice_payment_info">Informasi Pembayaran</h4>
+                                <div><label for="invoice-bank-name" class="block text-sm font-medium text-gray-400" data-translate-key="invoice_bank_name">Nama Bank</label>
                                     <select id="invoice-bank-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white">
                                         <option value="BCA">BCA (Bank Central Asia)</option>
                                         <option value="Mandiri">Mandiri</option>
@@ -208,31 +168,49 @@
                                         <option value="Lainnya">Lainnya</option>
                                     </select>
                                 </div>
-                                <div><label for="invoice-account-name" class="block text-sm font-medium text-gray-400">Nama Pemilik Rekening</label><input type="text" id="invoice-account-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div>
-                                <div><label for="invoice-account-number" class="block text-sm font-medium text-gray-400">Nomor Rekening</label><input type="text" id="invoice-account-number" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div>
+                                <div><label for="invoice-account-name" class="block text-sm font-medium text-gray-400" data-translate-key="invoice_account_name">Nama Pemilik Rekening</label><input type="text" id="invoice-account-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div>
+                                <div><label for="invoice-account-number" class="block text-sm font-medium text-gray-400" data-translate-key="invoice_account_number">Nomor Rekening</label><input type="text" id="invoice-account-number" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div>
                             </div>
-                            
                             <div class="pt-4 border-t border-white/10 flex justify-end gap-2">
-                                <button type="button" id="save-invoice-settings-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg" title="Simpan Info Bank">Simpan Info Bank</button>
-                                <button type="button" id="export-pdf-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg">Export PDF</button>
+                                <button type="button" id="save-invoice-settings-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg" title="Simpan Info Bank" data-translate-key="invoice_save_info_btn">Simpan Info Bank</button>
+                                <button type="button" id="export-pdf-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg" data-translate-key="invoice_export_btn">Export PDF</button>
                             </div>
                         </form>
                     </div>
-                    <!-- Kolom Preview Invoice -->
                     <div class="lg:col-span-3">
                         <div id="invoice-preview-wrapper" class="bg-white text-gray-800 p-2 sm:p-4 rounded-lg shadow-2xl">
-                            <div id="invoice-preview" class="p-4 sm:p-8">
-                                <!-- Konten preview akan dirender oleh JavaScript -->
-                            </div>
+                            <div id="invoice-preview" class="p-4 sm:p-8"></div>
                         </div>
                     </div>
                 </div>
             </main>
-            <main id="analytics-view" class="main-view hidden flex-grow flex-col"><div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6"><div class="glass-panel p-4 rounded-xl text-center"><h3 class="text-lg font-semibold text-gray-300">Total Proyek Selesai</h3><p id="analytics-total-done" class="text-4xl font-bold text-emerald-400 mt-2">0</p></div><div class="glass-panel p-4 rounded-xl text-center"><h3 class="text-lg font-semibold text-gray-300">Proyek Bulan Ini</h3><p id="analytics-this-month" class="text-4xl font-bold text-cyan-400 mt-2">0</p></div><div class="glass-panel p-4 rounded-xl text-center"><h3 class="text-lg font-semibold text-gray-300">Rata-rata Waktu Pengerjaan</h3><p id="analytics-avg-time" class="text-4xl font-bold text-amber-400 mt-2">N/A</p></div></div><div class="grid grid-cols-1 xl:grid-cols-2 gap-6"><div class="glass-panel p-4 rounded-xl"><h3 class="text-lg font-semibold text-white mb-4">Proyek Selesai per Minggu</h3><canvas id="completed-tasks-chart"></canvas></div><div class="glass-panel p-4 rounded-xl"><h3 class="text-lg font-semibold text-white mb-4">Distribusi Konten per Klien</h3><canvas id="artist-distribution-chart"></canvas></div></div></main>
+            <main id="analytics-view" class="main-view hidden flex-grow flex-col"><div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6"><div class="glass-panel p-4 rounded-xl text-center"><h3 class="text-lg font-semibold text-gray-300" data-translate-key="analytics_total_done">Total Proyek Selesai</h3><p id="analytics-total-done" class="text-4xl font-bold text-emerald-400 mt-2">0</p></div><div class="glass-panel p-4 rounded-xl text-center"><h3 class="text-lg font-semibold text-gray-300" data-translate-key="analytics_this_month">Proyek Bulan Ini</h3><p id="analytics-this-month" class="text-4xl font-bold text-cyan-400 mt-2">0</p></div><div class="glass-panel p-4 rounded-xl text-center"><h3 class="text-lg font-semibold text-gray-300" data-translate-key="analytics_avg_time">Rata-rata Waktu Pengerjaan</h3><p id="analytics-avg-time" class="text-4xl font-bold text-amber-400 mt-2">N/A</p></div></div><div class="grid grid-cols-1 xl:grid-cols-2 gap-6"><div class="glass-panel p-4 rounded-xl"><h3 class="text-lg font-semibold text-white mb-4" data-translate-key="analytics_chart1_title">Proyek Selesai per Minggu</h3><canvas id="completed-tasks-chart"></canvas></div><div class="glass-panel p-4 rounded-xl"><h3 class="text-lg font-semibold text-white mb-4" data-translate-key="analytics_chart2_title">Distribusi Konten per Klien</h3><canvas id="artist-distribution-chart"></canvas></div></div></main>
         </div>
     </div>
     
     <!-- All Modals and Panels are now outside the main screens -->
+    <div id="settings-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50">
+        <div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-md transform scale-95 opacity-0">
+            <h3 class="text-2xl font-bold mb-6" data-translate-key="settings_title">Pengaturan</h3>
+            <form id="settings-form" class="space-y-4">
+                <div>
+                    <label for="profile-display-name" class="block text-sm font-medium text-gray-300" data-translate-key="settings_display_name">Nama Tampilan</label>
+                    <input type="text" id="profile-display-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white">
+                </div>
+                <div>
+                    <label for="language-select" class="block text-sm font-medium text-gray-300" data-translate-key="settings_language">Bahasa</label>
+                    <select id="language-select" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white">
+                        <option value="id">Bahasa Indonesia</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="flex justify-end gap-4 pt-4">
+                    <button type="button" id="cancel-settings-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-lg" data-translate-key="btn_cancel">Batal</button>
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg" data-translate-key="btn_save">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <div id="onboarding-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0"><form id="onboarding-form"><h3 class="text-2xl font-bold mb-2 text-white">Selamat Datang!</h3><p class="text-gray-300 mb-6">Lengkapi profil Anda untuk mulai.</p><div class="space-y-4"><div><label for="profile-company-name" class="block text-sm font-medium text-gray-300">Nama Perusahaan/Komunitas</label><input type="text" id="profile-company-name" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="profile-field" class="block text-sm font-medium text-gray-300">Bergerak di Bidang</label><input type="text" id="profile-field" placeholder="cth: Video Editor, Agensi Kreatif" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="profile-contact" class="block text-sm font-medium text-gray-300">Kontak (Email/No. HP)</label><input type="text" id="profile-contact" class="mt-1 w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div></div><div class="flex justify-end gap-4 mt-8"><button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg flex items-center gap-2"><span>Simpan & Lanjutkan</span><div id="onboarding-loader" class="loader hidden"></div></button></div></form></div></div>
     <div id="task-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0"><form id="task-form"><input type="hidden" id="task-id"><h3 id="task-modal-title" class="text-2xl font-bold mb-6">Tambah Proyek Baru</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4"><div><label for="task-client-name" class="block text-sm font-medium text-gray-300 mb-1">Nama Klien</label><input type="text" id="task-client-name" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="task-project-type" class="block text-sm font-medium text-gray-300 mb-1">Jenis Proyek</label><input type="text" id="task-project-type" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="task-priority" class="block text-sm font-medium text-gray-300 mb-1">Prioritas</label><select id="task-priority" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"><option value="biasa">Biasa</option><option value="penting">Penting</option><option value="mendesak">Mendesak</option></select></div><div><label for="task-deadline" class="block text-sm font-medium text-gray-300 mb-1">Deadline</label><input type="date" id="task-deadline" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div class="sm:col-span-2"><label for="task-contact" class="block text-sm font-medium text-gray-300 mb-1">Kontak Klien</label><input type="text" id="task-contact" placeholder="Email atau No. HP" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div></div><div class="mb-6"><label for="brief" class="block text-sm font-medium text-gray-300 mb-1">Brief / Catatan</label><textarea id="brief" rows="3" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></textarea></div><div class="flex justify-end gap-4"><button type="button" id="cancel-task-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-lg">Batal</button><button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg">Simpan</button></div></form></div></div>
     <div id="asset-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0"><form id="asset-form"><input type="hidden" id="asset-id"><h3 id="asset-modal-title" class="text-2xl font-bold mb-6">Tambah Aset Baru</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4"><div class="sm:col-span-2"><label for="asset-file-link" class="block text-sm font-medium text-gray-300 mb-1">Link Google Drive</label><input type="url" id="asset-file-link" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="asset-client-name" class="block text-sm font-medium text-gray-300 mb-1">Nama Klien</label><input type="text" id="asset-client-name" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="asset-project-type" class="block text-sm font-medium text-gray-300 mb-1">Jenis Proyek</label><input type="text" id="asset-project-type" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div><label for="asset-shoot-date" class="block text-sm font-medium text-gray-300 mb-1">Tanggal Syuting</label><input type="date" id="asset-shoot-date" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white" required></div><div><label for="asset-type" class="block text-sm font-medium text-gray-300 mb-1">Jenis Aset</label><select id="asset-type" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"><option value="mentah">Footage Mentah</option><option value="final">Konten Final</option></select></div></div><div class="mb-6"><label for="asset-tags" class="block text-sm font-medium text-gray-300 mb-1">Tags (pisahkan dengan koma)</label><input type="text" id="asset-tags" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white"></div><div class="flex justify-end gap-4"><button type="button" id="cancel-asset-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-lg">Batal</button><button type="submit" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-5 rounded-lg">Simpan</button></div></form></div></div>
@@ -240,7 +218,7 @@
     <div id="timer-alert-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50"><div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-sm text-center transform scale-95 opacity-0"><div class="text-yellow-400 mb-4"><i class="ph-fill ph-timer text-5xl"></i></div><h3 class="text-lg font-bold text-white mb-2">Sesi Fokus Selesai!</h3><p class="text-gray-300 mb-6">Kerja bagus! Waktunya istirahat sejenak.</p><div class="flex justify-center"><button id="ok-timer-alert-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-8 rounded-lg">Oke</button></div></div></div>
     <div id="comments-panel-overlay" class="fixed inset-0 bg-black bg-opacity-70 hidden z-40"></div>
     <div id="comments-panel" class="side-panel glass-panel fixed top-0 right-0 h-full w-full max-w-md shadow-2xl transform translate-x-full z-50 flex flex-col"><div class="flex justify-between items-center p-4 border-b border-white/10 flex-shrink-0"><h3 id="comments-task-title" class="text-lg font-bold text-white truncate pr-4">Komentar</h3><button id="close-comments-btn" class="p-2 text-gray-400 hover:text-white"><i class="ph-bold ph-x text-xl"></i></button></div><div id="comments-list" class="flex-grow p-4 overflow-y-auto custom-scrollbar"></div><div class="p-4 border-t border-white/10 flex-shrink-0"><form id="comment-form" class="flex gap-2"><input type="text" id="comment-input" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Tulis komentar..." required><button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-lg flex items-center justify-center"><i class="ph-bold ph-paper-plane-tilt text-xl"></i></button></form></div></div>
-    <div id="focus-bar" class="fixed bottom-0 left-0 right-0 glass-panel shadow-lg"><div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-2 grid grid-cols-2 md:grid-cols-3 items-center gap-4"><div class="flex items-center gap-3 justify-start"><i class="ph-bold ph-timer text-xl text-yellow-400"></i><span class="font-semibold text-white hidden sm:inline">Editor Focus</span><span id="timer-display" class="text-lg font-mono bg-slate-900/70 text-white px-2 py-0.5 rounded-md">30:00</span></div><div class="hidden md:flex flex-col items-center justify-center"><div class="w-full max-w-xs bg-slate-600/50 rounded-full h-2.5"><div id="timer-progress" class="bg-yellow-400 h-2.5 rounded-full" style="width: 100%;"></div></div></div><div class="flex items-center gap-4 justify-end"><div class="text-xs text-gray-500 hidden lg:block">Dibuat oleh <span class="font-semibold text-gray-400">Fachry Akbar</span></div><div class="flex items-center gap-2"><button id="start-timer-btn" class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition-colors"><i class="ph-bold ph-play"></i></button><button id="pause-timer-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full transition-colors hidden"><i class="ph-bold ph-pause"></i></button><button id="reset-timer-btn" class="bg-red-600 hover:bg-red-700 text-white p-2 rounded-full transition-colors"><i class="ph-bold ph-arrow-counter-clockwise"></i></button></div></div></div></div>
+    <div id="focus-bar" class="fixed bottom-0 left-0 right-0 glass-panel shadow-lg"><div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-2 grid grid-cols-2 md:grid-cols-3 items-center gap-4"><div class="flex items-center gap-3 justify-start"><i class="ph-bold ph-timer text-xl text-yellow-400"></i><span class="font-semibold text-white hidden sm:inline">Editor Focus</span><span id="timer-display" class="text-lg font-mono bg-slate-900/70 text-white px-2 py-0.5 rounded-md">30:00</span></div><div class="hidden md:flex flex-col items-center justify-center"><div class="w-full max-w-xs bg-slate-600/50 rounded-full h-2.5"><div id="timer-progress" class="bg-yellow-400 h-2.5 rounded-full" style="width: 100%;"></div></div></div><div class="flex items-center gap-4 justify-end"><div class="text-xs text-gray-500 hidden lg:block" data-translate-key="app_version">FocusCut Version 0.2</div><div class="flex items-center gap-2"><button id="start-timer-btn" class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition-colors"><i class="ph-bold ph-play"></i></button><button id="pause-timer-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full transition-colors hidden"><i class="ph-bold ph-pause"></i></button><button id="reset-timer-btn" class="bg-red-600 hover:bg-red-700 text-white p-2 rounded-full transition-colors"><i class="ph-bold ph-arrow-counter-clockwise"></i></button></div></div></div>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -269,6 +247,7 @@
         let unsubscribeComments = null;
         let completedTasksChart = null;
         let artistDistributionChart = null;
+        let currentLang = 'id';
 
         // --- ELEMEN UTAMA ---
         const loginScreen = document.getElementById('login-screen');
@@ -298,6 +277,7 @@
                     const doc = await whitelistRef.get();
                     if (doc.exists) {
                         userProfileData = doc.data();
+                        currentLang = userProfileData.language || 'id'; // Muat preferensi bahasa
                         startAppFlow(user, userProfileData);
                     } else {
                         loginErrorMsg.textContent = "Akses ditolak. Email Anda tidak terdaftar.";
@@ -353,8 +333,8 @@
         // --- FUNGSI INISIALISASI UI UTAMA ---
         function initializeAppUI(user, profileData) {
             appScreen.style.display = 'flex';
-            document.getElementById('company-name-display').textContent = profileData.companyName || 'Nama Perusahaan';
-            document.getElementById('user-name-display').textContent = profileData.displayName || user.email;
+            document.getElementById('company-name-display').textContent = profileData.companyName || 'FocusCut';
+            document.getElementById('user-name-display').textContent = profileData.displayName || user.displayName;
             document.getElementById('profile-pic').src = profileData.photoURL || user.photoURL || 'https://placehold.co/100x100/1e293b/94a3b8?text=User';
             if (profileData.backgroundURL) {
                 document.body.style.backgroundImage = `url('${profileData.backgroundURL}')`;
@@ -370,12 +350,14 @@
             setupCommentSubmission(user, profileData);
             setupInvoiceGenerator(user, profileData); 
             setupTimer();
+            setupSettings(user, profileData); // Fitur baru
+            setLanguage(currentLang); // Terapkan bahasa
             
             listenToTasks(user.uid);
             listenToAssets(user.uid);
         }
         
-        // --- FUNGSI INVOICE (FOKUS REVISI) ---
+        // --- FUNGSI INTI LAINNYA ---
         function setupInvoiceGenerator(user, profileData) {
             const invoiceForm = document.getElementById('invoice-form');
             const itemsContainer = document.getElementById('invoice-items-container');
@@ -383,20 +365,14 @@
             const previewContainer = document.getElementById('invoice-preview');
             const saveSettingsBtn = document.getElementById('save-invoice-settings-btn');
             
-            // REVISI: Hapus input upload logo dari DOM
-            const logoUploadContainer = document.querySelector('label[for="invoice-company-logo"]');
-            if(logoUploadContainer) logoUploadContainer.parentElement.remove();
-
             const bankNameInput = document.getElementById('invoice-bank-name');
             const accountNameInput = document.getElementById('invoice-account-name');
             const accountNumberInput = document.getElementById('invoice-account-number');
             
-            // Isi form dengan data yang tersimpan
             bankNameInput.value = profileData.bankName || 'BCA';
             accountNameInput.value = profileData.accountName || '';
             accountNumberInput.value = profileData.accountNumber || '';
 
-            // Event listener untuk simpan info bank
             saveSettingsBtn.addEventListener('click', () => {
                 const newSettings = {
                     bankName: bankNameInput.value,
@@ -446,7 +422,6 @@
                 }
                 const formattedDueDate = dueDate.toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
                 
-                // REVISI: Logo diambil dari foto profil pengguna
                 const companyLogo = profileData.photoURL || user.photoURL || 'https://placehold.co/100x100/1e293b/94a3b8?text=Logo';
 
                 previewContainer.innerHTML = `
@@ -540,7 +515,6 @@
             renderPreview();
         }
 
-        // --- FUNGSI KOMENTAR (FOKUS PERBAIKAN) ---
         function setupCommentSubmission(user, profileData) {
             const form = document.getElementById('comment-form');
             const newForm = form.cloneNode(true);
@@ -566,7 +540,6 @@
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 };
                 
-                // REVISI: Menggunakan path yang benar sesuai aturan: /tasks/{taskId}/comments/{commentId}
                 db.collection('tasks').doc(taskId).collection('comments').add(commentData)
                   .then(() => {
                       input.value = '';
@@ -601,7 +574,6 @@
         document.getElementById('comments-panel-overlay').addEventListener('click', closeCommentsPanel);
         function listenToComments(taskId) {
             const commentsList = document.getElementById('comments-list');
-            // REVISI: Menggunakan path yang benar sesuai aturan.
             const commentsPath = db.collection('tasks').doc(taskId).collection('comments').orderBy('createdAt', 'asc');
             unsubscribeComments = commentsPath.onSnapshot(snapshot => {
                 commentsList.innerHTML = '';
@@ -618,7 +590,6 @@
             }, err => { console.error("Gagal memuat komentar:", err); commentsList.innerHTML = `<p class="text-center text-red-400 mt-4">Gagal memuat komentar.</p>`; });
         }
         
-        // --- FUNGSI INTI LAINNYA (TIDAK DIUBAH) ---
         function setupKanbanInteractions(user, profileData) {
             const kanbanBoard = document.getElementById('kanban-board');
             kanbanBoard.addEventListener('click', e => {
@@ -634,20 +605,16 @@
             const checkScroll = () => {
                 if (!scrollWrapper) return;
                 const maxScrollLeft = scrollWrapper.scrollWidth - scrollWrapper.clientWidth;
-                scrollLeftBtn.style.display = scrollWrapper.scrollLeft > 0 ? 'flex' : 'none';
-                scrollRightBtn.style.display = scrollWrapper.scrollLeft < maxScrollLeft - 1 ? 'flex' : 'none';
+                scrollLeftBtn.style.display = scrollWrapper.scrollLeft > 5 ? 'flex' : 'none';
+                scrollRightBtn.style.display = scrollWrapper.scrollLeft < maxScrollLeft - 5 ? 'flex' : 'none';
             };
 
-            scrollLeftBtn.addEventListener('click', () => {
-                scrollWrapper.scrollBy({ left: -350, behavior: 'smooth' });
-            });
-            scrollRightBtn.addEventListener('click', () => {
-                scrollWrapper.scrollBy({ left: 350, behavior: 'smooth' });
-            });
+            scrollLeftBtn.addEventListener('click', () => { scrollWrapper.scrollBy({ left: -350, behavior: 'smooth' }); });
+            scrollRightBtn.addEventListener('click', () => { scrollWrapper.scrollBy({ left: 350, behavior: 'smooth' }); });
             scrollWrapper.addEventListener('scroll', checkScroll);
             window.addEventListener('resize', checkScroll);
-            // Initial check
-            setTimeout(checkScroll, 500);
+            
+            new ResizeObserver(checkScroll).observe(kanbanBoard);
 
             let draggedItemId = null;
             kanbanBoard.addEventListener('dragstart', e => { const target = e.target.closest('.task-card'); if (target) { draggedItemId = target.dataset.id; e.dataTransfer.setData('text/plain', draggedItemId); setTimeout(() => target.classList.add('dragging'), 0); } });
@@ -695,7 +662,28 @@
             const columns = { todo: document.getElementById('todo-column'), wip: document.getElementById('wip-column'), review: document.getElementById('review-column'), done: document.getElementById('done-column') };
             const counts = { todo: 0, wip: 0, review: 0, done: 0 };
             Object.values(columns).forEach(col => col.innerHTML = '');
-            tasks.forEach(task => {
+            
+            const searchTerm = document.getElementById('task-search-input').value.toLowerCase();
+            const sortValue = document.getElementById('task-sort-select').value;
+            
+            let filteredTasks = tasks.filter(task => 
+                task.clientName.toLowerCase().includes(searchTerm) ||
+                task.projectType.toLowerCase().includes(searchTerm)
+            );
+
+            filteredTasks.sort((a, b) => {
+                if (sortValue === 'deadline') {
+                    return (a.deadline || '9999-12-31').localeCompare(b.deadline || '9999-12-31');
+                }
+                if (sortValue === 'prioritas') {
+                    const priorityOrder = { 'mendesak': 1, 'penting': 2, 'biasa': 3 };
+                    return (priorityOrder[a.priority] || 3) - (priorityOrder[b.priority] || 3);
+                }
+                // Default: terbaru
+                return (b.createdAt?.toMillis() || 0) - (a.createdAt?.toMillis() || 0);
+            });
+
+            filteredTasks.forEach(task => {
                 if (columns[task.status]) {
                     const taskCard = document.createElement('div');
                     taskCard.className = `task-card glass-card p-4 rounded-lg mb-4 border-l-4 priority-${task.priority}`;
@@ -711,7 +699,6 @@
             document.getElementById('review-count').textContent = counts.review;
             document.getElementById('done-count').textContent = counts.done;
             updateAnalytics(tasks);
-            // Panggil checkScroll setelah render
             setTimeout(() => document.getElementById('kanban-scroll-wrapper')?.dispatchEvent(new Event('scroll')), 100);
         }
         function renderAllAssets(assets) {
@@ -727,8 +714,8 @@
                 grid.appendChild(assetCard);
             });
         }
-        function listenToTasks(uid) { db.collection('tasks').where('ownerId', '==', uid).onSnapshot(snapshot => { const tasks = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })); renderAllTasks(tasks); }, error => console.error("Error mendengarkan perubahan proyek:", error)); }
-        function listenToAssets(uid) { db.collection('assets').where('ownerId', '==', uid).onSnapshot(snapshot => { const assets = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })); renderAllAssets(assets); }, error => console.error("Error mendengarkan perubahan aset:", error)); }
+        function listenToTasks(uid) { db.collection('tasks').where('ownerId', '==', uid).onSnapshot(snapshot => { renderAllTasks(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))); }, error => console.error("Error mendengarkan perubahan proyek:", error)); }
+        function listenToAssets(uid) { db.collection('assets').where('ownerId', '==', uid).onSnapshot(snapshot => { renderAllAssets(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))); }, error => console.error("Error mendengarkan perubahan aset:", error)); }
         function updateAnalytics(tasks) {
             const doneTasks = tasks.filter(task => task.status === 'done' && task.completedAt);
             const now = new Date();
@@ -845,6 +832,160 @@
             navButtons.forEach(button => { button.addEventListener('click', () => handleNavigation(button.dataset.view)); });
             handleNavigation('kanban-view');
         }
+
+        // --- FITUR BARU: PENGATURAN & BAHASA ---
+        const translations = {
+            id: {
+                login_title: "FocusCut",
+                login_subtitle: "Masuk untuk melanjutkan ke dasbor Anda.",
+                login_btn: "Masuk dengan Google",
+                app_version: "FocusCut Versi 0.2",
+                logged_in_as: "Login sebagai:",
+                add_project_btn: "Tambah Proyek",
+                add_asset_btn: "Tambah Aset",
+                nav_kanban: "Papan Proyek",
+                nav_assets: "Bank Konten",
+                nav_invoice: "Invoice",
+                nav_analytics: "Analitik",
+                search_placeholder: "Cari proyek...",
+                sort_newest: "Urutkan: Terbaru",
+                sort_deadline: "Urutkan: Deadline Terdekat",
+                sort_priority: "Urutkan: Prioritas Tertinggi",
+                col_todo: "List Konten",
+                col_wip: "Proses Editing",
+                col_review: "Review / Revisi",
+                col_done: "Selesai",
+                settings_title: "Pengaturan",
+                settings_display_name: "Nama Tampilan",
+                settings_language: "Bahasa",
+                btn_cancel: "Batal",
+                btn_save: "Simpan",
+                invoice_create_title: "Buat Invoice",
+                invoice_client_info: "Informasi Klien",
+                invoice_client_name: "Nama Klien",
+                invoice_client_email: "Email Klien",
+                invoice_due_date: "Tanggal Jatuh Tempo",
+                invoice_items: "Item Tagihan",
+                invoice_add_item_btn: "+ Tambah Item",
+                invoice_payment_info: "Informasi Pembayaran",
+                invoice_bank_name: "Nama Bank",
+                invoice_account_name: "Nama Pemilik Rekening",
+                invoice_account_number: "Nomor Rekening",
+                invoice_save_info_btn: "Simpan Info Bank",
+                invoice_export_btn: "Export PDF",
+                analytics_total_done: "Total Proyek Selesai",
+                analytics_this_month: "Proyek Bulan Ini",
+                analytics_avg_time: "Rata-rata Waktu Pengerjaan",
+                analytics_chart1_title: "Proyek Selesai per Minggu",
+                analytics_chart2_title: "Distribusi Konten per Klien",
+            },
+            en: {
+                login_title: "FocusCut",
+                login_subtitle: "Sign in to continue to your dashboard.",
+                login_btn: "Sign in with Google",
+                app_version: "FocusCut Version 0.2",
+                logged_in_as: "Logged in as:",
+                add_project_btn: "Add Project",
+                add_asset_btn: "Add Asset",
+                nav_kanban: "Project Board",
+                nav_assets: "Content Bank",
+                nav_invoice: "Invoice",
+                nav_analytics: "Analytics",
+                search_placeholder: "Search projects...",
+                sort_newest: "Sort by: Newest",
+                sort_deadline: "Sort by: Deadline",
+                sort_priority: "Sort by: Highest Priority",
+                col_todo: "Content List",
+                col_wip: "Editing Process",
+                col_review: "Review / Revision",
+                col_done: "Completed",
+                settings_title: "Settings",
+                settings_display_name: "Display Name",
+                settings_language: "Language",
+                btn_cancel: "Cancel",
+                btn_save: "Save",
+                invoice_create_title: "Create Invoice",
+                invoice_client_info: "Client Information",
+                invoice_client_name: "Client Name",
+                invoice_client_email: "Client Email",
+                invoice_due_date: "Due Date",
+                invoice_items: "Invoice Items",
+                invoice_add_item_btn: "+ Add Item",
+                invoice_payment_info: "Payment Information",
+                invoice_bank_name: "Bank Name",
+                invoice_account_name: "Account Holder Name",
+                invoice_account_number: "Account Number",
+                invoice_save_info_btn: "Save Bank Info",
+                invoice_export_btn: "Export PDF",
+                analytics_total_done: "Total Completed Projects",
+                analytics_this_month: "Projects This Month",
+                analytics_avg_time: "Average Turnaround Time",
+                analytics_chart1_title: "Weekly Completed Projects",
+                analytics_chart2_title: "Content Distribution by Client",
+            }
+        };
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.dataset.translateKey;
+                if (translations[lang] && translations[lang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = translations[lang][key];
+                    } else {
+                        el.textContent = translations[lang][key];
+                    }
+                }
+            });
+        }
+
+        function setupSettings(user, profileData) {
+            const settingsModal = document.getElementById('settings-modal');
+            const settingsBtn = document.getElementById('settings-btn');
+            const cancelBtn = document.getElementById('cancel-settings-btn');
+            const settingsForm = document.getElementById('settings-form');
+            const nameInput = document.getElementById('profile-display-name');
+            const langSelect = document.getElementById('language-select');
+
+            settingsBtn.addEventListener('click', () => {
+                nameInput.value = profileData.displayName || user.displayName;
+                langSelect.value = currentLang;
+                openModal(settingsModal);
+            });
+
+            cancelBtn.addEventListener('click', () => closeModal(settingsModal));
+
+            settingsForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newName = nameInput.value;
+                const newLang = langSelect.value;
+                
+                const updates = {
+                    displayName: newName,
+                    language: newLang,
+                };
+
+                db.collection('whitelisted_users').doc(user.email).update(updates)
+                  .then(() => {
+                      // Update local state
+                      userProfileData.displayName = newName;
+                      userProfileData.language = newLang;
+                      // Update UI
+                      document.getElementById('user-name-display').textContent = newName;
+                      setLanguage(newLang);
+                      closeModal(settingsModal);
+                      alert('Pengaturan berhasil disimpan!');
+                  })
+                  .catch(err => {
+                      console.error("Gagal simpan pengaturan:", err);
+                      alert('Gagal menyimpan pengaturan.');
+                  });
+            });
+        }
+        
+        // --- FITUR BARU: PENCARIAN & URUTKAN ---
+        document.getElementById('task-search-input').addEventListener('input', () => renderAllTasks(allTasksCache));
+        document.getElementById('task-sort-select').addEventListener('change', () => renderAllTasks(allTasksCache));
     });
     </script>
 </body>
