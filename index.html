@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FocusCut</title>
     
-    <link rel="icon" href="https://i.imgur.com/2z2b0so.jpeg" type="image/jpeg" />
-
     <!-- External Libraries & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,7 +69,9 @@
     <!-- Login Screen -->
     <div id="login-screen" class="min-h-screen flex items-center justify-center p-4">
         <div class="glass-panel rounded-2xl p-8 text-center max-w-md w-full">
-            <img src="https://i.imgur.com/2z2b0so.jpeg" alt="FocusCut Logo" class="w-28 h-28 mx-auto mb-4 rounded-full object-cover">
+            <!-- REVISI: Logo Baru -->
+            <img src="https://i.imgur.com/2z2b0so.jpeg" alt="FocusCut Logo" class="w-28 h-28 mx-auto mb-4">
+            <!-- REVISI: Nama Brand Baru -->
             <h1 class="text-3xl font-bold text-white mb-2" data-translate-key="login_title">FocusCut</h1>
             <p class="text-gray-300 mb-6" data-translate-key="login_subtitle">Masuk untuk melanjutkan ke dasbor Anda.</p>
             <div id="login-error-message" class="hidden text-left text-sm bg-red-900/50 text-red-300 p-3 rounded-lg mb-4"></div>
@@ -257,7 +257,7 @@
         const openModal = (modalElement) => { if (modalElement) { modalElement.classList.remove('hidden'); setTimeout(() => { if (modalElement.firstElementChild) modalElement.firstElementChild.classList.remove('scale-95', 'opacity-0'); }, 10); }};
         const closeModal = (modalElement) => { if (modalElement) { if (modalElement.firstElementChild) modalElement.firstElementChild.classList.add('scale-95', 'opacity-0'); setTimeout(() => modalElement.classList.add('hidden'), 300); }};
 
-        // --- LOGIKA OTENTIKASI (DIKEMBALIKAN KE VERSI STABIL) ---
+        // --- LOGIKA OTENTIKASI (TIDAK DIUBAH) ---
         const provider = new firebase.auth.GoogleAuthProvider();
         googleLoginBtn.addEventListener('click', () => {
             auth.signInWithPopup(provider).catch((error) => {
@@ -275,9 +275,8 @@
                     const doc = await whitelistRef.get();
                     if (doc.exists) {
                         userProfileData = doc.data();
-                        currentLang = userProfileData.language || 'id';
-                        // REVISI: Langsung panggil initializeAppUI, tidak ada lagi cek onboarding
-                        initializeAppUI(user, userProfileData);
+                        currentLang = userProfileData.language || 'id'; // Muat preferensi bahasa
+                        startAppFlow(user, userProfileData);
                     } else {
                         loginErrorMsg.textContent = "Akses ditolak. Email Anda tidak terdaftar.";
                         loginErrorMsg.classList.remove('hidden');
@@ -296,11 +295,42 @@
             }
         });
 
+        // --- FUNGSI ALUR APLIKASI UTAMA ---
+        function startAppFlow(user, profileData) {
+            loginScreen.style.display = 'none';
+            if (profileData && profileData.companyName) {
+                initializeAppUI(user, profileData);
+            } else {
+                appScreen.style.display = 'none'; 
+                openModal(document.getElementById('onboarding-modal'));
+                setupOnboarding(user, profileData || {});
+            }
+        }
+
+        function setupOnboarding(user, existingData) {
+            const onboardingForm = document.getElementById('onboarding-form');
+            onboardingForm.onsubmit = async (e) => {
+                e.preventDefault();
+                const newProfileData = {
+                    ...existingData, uid: user.uid, displayName: user.displayName, email: user.email, photoURL: user.photoURL,
+                    companyName: document.getElementById('profile-company-name').value,
+                    field: document.getElementById('profile-field').value,
+                    contact: document.getElementById('profile-contact').value,
+                    profileCompletedAt: firebase.firestore.FieldValue.serverTimestamp()
+                };
+                try {
+                    await db.collection('whitelisted_users').doc(user.email).update(newProfileData);
+                    closeModal(document.getElementById('onboarding-modal'));
+                    initializeAppUI(user, newProfileData);
+                } catch (error) {
+                    console.error("Gagal memperbarui profil:", error);
+                }
+            };
+        }
+
         // --- FUNGSI INISIALISASI UI UTAMA ---
         function initializeAppUI(user, profileData) {
-            loginScreen.style.display = 'none';
             appScreen.style.display = 'flex';
-            
             document.getElementById('company-name-display').textContent = profileData.companyName || 'FocusCut';
             document.getElementById('user-name-display').textContent = profileData.displayName || user.displayName;
             document.getElementById('profile-pic').src = profileData.photoURL || user.photoURL || 'https://placehold.co/100x100/1e293b/94a3b8?text=User';
@@ -318,14 +348,14 @@
             setupCommentSubmission(user, profileData);
             setupInvoiceGenerator(user, profileData); 
             setupTimer();
-            setupSettings(user, profileData);
-            setLanguage(currentLang);
+            setupSettings(user, profileData); // Fitur baru
+            setLanguage(currentLang); // Terapkan bahasa
             
             listenToTasks(user.uid);
             listenToAssets(user.uid);
         }
         
-        // --- FUNGSI INTI LAINNYA (TIDAK DIUBAH) ---
+        // --- FUNGSI INTI LAINNYA ---
         function setupInvoiceGenerator(user, profileData) {
             const invoiceForm = document.getElementById('invoice-form');
             const itemsContainer = document.getElementById('invoice-items-container');
