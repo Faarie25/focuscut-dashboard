@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FocusCut</title>
     
-    <!-- REVISI: Penambahan Favicon -->
     <link rel="icon" href="https://i.imgur.com/2z2b0so.jpeg" type="image/jpeg" />
 
     <!-- External Libraries & Fonts -->
@@ -258,7 +257,7 @@
         const openModal = (modalElement) => { if (modalElement) { modalElement.classList.remove('hidden'); setTimeout(() => { if (modalElement.firstElementChild) modalElement.firstElementChild.classList.remove('scale-95', 'opacity-0'); }, 10); }};
         const closeModal = (modalElement) => { if (modalElement) { if (modalElement.firstElementChild) modalElement.firstElementChild.classList.add('scale-95', 'opacity-0'); setTimeout(() => modalElement.classList.add('hidden'), 300); }};
 
-        // --- LOGIKA OTENTIKASI (TIDAK DIUBAH) ---
+        // --- LOGIKA OTENTIKASI (DIKEMBALIKAN KE VERSI STABIL) ---
         const provider = new firebase.auth.GoogleAuthProvider();
         googleLoginBtn.addEventListener('click', () => {
             auth.signInWithPopup(provider).catch((error) => {
@@ -276,8 +275,9 @@
                     const doc = await whitelistRef.get();
                     if (doc.exists) {
                         userProfileData = doc.data();
-                        currentLang = userProfileData.language || 'id'; // Muat preferensi bahasa
-                        startAppFlow(user, userProfileData);
+                        currentLang = userProfileData.language || 'id';
+                        // REVISI: Langsung panggil initializeAppUI, tidak ada lagi cek onboarding
+                        initializeAppUI(user, userProfileData);
                     } else {
                         loginErrorMsg.textContent = "Akses ditolak. Email Anda tidak terdaftar.";
                         loginErrorMsg.classList.remove('hidden');
@@ -296,42 +296,11 @@
             }
         });
 
-        // --- FUNGSI ALUR APLIKASI UTAMA ---
-        function startAppFlow(user, profileData) {
-            loginScreen.style.display = 'none';
-            if (profileData && profileData.companyName) {
-                initializeAppUI(user, profileData);
-            } else {
-                appScreen.style.display = 'none'; 
-                openModal(document.getElementById('onboarding-modal'));
-                setupOnboarding(user, profileData || {});
-            }
-        }
-
-        function setupOnboarding(user, existingData) {
-            const onboardingForm = document.getElementById('onboarding-form');
-            onboardingForm.onsubmit = async (e) => {
-                e.preventDefault();
-                const newProfileData = {
-                    ...existingData, uid: user.uid, displayName: user.displayName, email: user.email, photoURL: user.photoURL,
-                    companyName: document.getElementById('profile-company-name').value,
-                    field: document.getElementById('profile-field').value,
-                    contact: document.getElementById('profile-contact').value,
-                    profileCompletedAt: firebase.firestore.FieldValue.serverTimestamp()
-                };
-                try {
-                    await db.collection('whitelisted_users').doc(user.email).update(newProfileData);
-                    closeModal(document.getElementById('onboarding-modal'));
-                    initializeAppUI(user, newProfileData);
-                } catch (error) {
-                    console.error("Gagal memperbarui profil:", error);
-                }
-            };
-        }
-
         // --- FUNGSI INISIALISASI UI UTAMA ---
         function initializeAppUI(user, profileData) {
+            loginScreen.style.display = 'none';
             appScreen.style.display = 'flex';
+            
             document.getElementById('company-name-display').textContent = profileData.companyName || 'FocusCut';
             document.getElementById('user-name-display').textContent = profileData.displayName || user.displayName;
             document.getElementById('profile-pic').src = profileData.photoURL || user.photoURL || 'https://placehold.co/100x100/1e293b/94a3b8?text=User';
@@ -349,14 +318,14 @@
             setupCommentSubmission(user, profileData);
             setupInvoiceGenerator(user, profileData); 
             setupTimer();
-            setupSettings(user, profileData); // Fitur baru
-            setLanguage(currentLang); // Terapkan bahasa
+            setupSettings(user, profileData);
+            setLanguage(currentLang);
             
             listenToTasks(user.uid);
             listenToAssets(user.uid);
         }
         
-        // --- FUNGSI INTI LAINNYA ---
+        // --- FUNGSI INTI LAINNYA (TIDAK DIUBAH) ---
         function setupInvoiceGenerator(user, profileData) {
             const invoiceForm = document.getElementById('invoice-form');
             const itemsContainer = document.getElementById('invoice-items-container');
