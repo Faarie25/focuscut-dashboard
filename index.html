@@ -17,6 +17,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <script src="https://cdn.jsdelivr.net/npm/date-fns"></script>
     
+    <!-- PENAMBAHAN: FFmpeg.wasm Libraries -->
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js" defer></script>
+    
     <!-- Firebase Libraries (Compat Version) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -62,6 +65,10 @@
         #scroll-left-btn { left: -20px; }
         #scroll-right-btn { right: -20px; }
         @media (min-width: 1024px) { .scroll-btn { display: flex; } }
+        /* PENAMBAHAN: Style untuk progress bar */
+        progress { border-radius: 7px; width: 100%; height: 12px; }
+        progress::-webkit-progress-bar { background-color: rgba(71, 85, 105, 0.5); border-radius: 7px; }
+        progress::-webkit-progress-value { background-color: #4f46e5; border-radius: 7px; transition: width 0.1s linear; }
     </style>
 </head>
 <body class="text-white">
@@ -77,7 +84,7 @@
                 <svg class="w-6 h-6" viewBox="0 0 48 48"><path fill="#4285F4" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#34A853" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l5.657,5.657C40.074,36.938,44,31.016,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FBBC05" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#EA4335" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="none" d="M6,13.5l6,5l6-5L12,2z"></path></svg>
                 <span data-lang-key="login_button">Masuk dengan Google</span>
             </button>
-            <p class="text-xs text-gray-500 mt-8">FocusCut Version 0.2</p>
+            <p class="text-xs text-gray-500 mt-8">FocusCut Version 0.3</p>
         </div>
     </div>
 
@@ -94,7 +101,6 @@
                 </label>
                 <input type="file" id="profile-pic-input" class="hidden" accept="image/*">
                 <div>
-                    <!-- PENAMBAHAN: Tombol edit untuk nama perusahaan -->
                     <div class="flex items-center gap-2">
                          <h1 id="company-name-display" class="text-xl sm:text-2xl font-bold text-white">Nama Perusahaan</h1>
                          <button id="edit-company-btn" class="text-gray-400 hover:text-white" title="Edit Nama Perusahaan"><i class="ph ph-pencil-simple"></i></button>
@@ -123,6 +129,8 @@
 
         <nav class="flex space-x-2 mb-6 overflow-x-auto custom-scrollbar pb-2">
             <button id="nav-kanban" data-view="kanban-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-columns mr-1"></i> <span data-lang-key="nav_kanban">Papan Proyek</span></button>
+            <!-- PENAMBAHAN: Tombol Navigasi Converter -->
+            <button id="nav-converter" data-view="converter-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-film-strip mr-1"></i> <span data-lang-key="nav_converter">Video Converter</span></button>
             <button id="nav-assets" data-view="assets-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-database mr-1"></i> <span data-lang-key="nav_assets">Bank Konten</span></button>
             <button id="nav-invoice" data-view="invoice-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-receipt mr-1"></i> <span data-lang-key="nav_invoice">Invoice</span></button>
             <button id="nav-analytics" data-view="analytics-view" class="nav-btn font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex-shrink-0"><i class="ph-fill ph-chart-bar mr-1"></i> <span data-lang-key="nav_analytics">Analitik</span></button>
@@ -152,6 +160,73 @@
                     <button id="scroll-right-btn" class="scroll-btn"><i class="ph-bold ph-caret-right text-2xl"></i></button>
                 </div>
             </main>
+            
+            <!-- PENAMBAHAN: Halaman Video Converter -->
+            <main id="converter-view" class="main-view hidden flex-grow flex-col">
+                <div class="glass-panel rounded-xl p-6 max-w-2xl mx-auto w-full">
+                    <h2 class="text-2xl font-bold mb-6 text-center" data-lang-key="converter_title">Video Converter & Compressor</h2>
+                    
+                    <div id="converter-loading-state" class="text-center py-8">
+                        <div class="loader inline-block mb-4"></div>
+                        <p class="text-gray-300" data-lang-key="converter_loading_engine">Memuat mesin converter...</p>
+                    </div>
+
+                    <div id="converter-ui" class="hidden space-y-6">
+                        <!-- Upload Section -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2" data-lang-key="converter_upload_label">1. Upload Video</label>
+                            <label for="video-upload-input" class="w-full flex items-center justify-center gap-3 bg-slate-700/50 hover:bg-slate-600/50 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-300 cursor-pointer">
+                                <i class="ph-bold ph-upload-simple text-xl"></i>
+                                <span id="file-upload-text" data-lang-key="converter_choose_file">Pilih File Video</span>
+                            </label>
+                            <input type="file" id="video-upload-input" class="hidden" accept="video/*,audio/*">
+                            <p id="file-name-display" class="text-xs text-gray-400 mt-2 text-center"></p>
+                        </div>
+
+                        <!-- Settings Section -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="format-select" class="block text-sm font-medium text-gray-300 mb-2" data-lang-key="converter_format_label">2. Pilih Format Output</label>
+                                <select id="format-select" class="w-full appearance-none bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                                    <option value="mp4">MP4 (Video)</option>
+                                    <option value="mov">MOV (Video)</option>
+                                    <option value="mp3">MP3 (Audio)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="quality-select" class="block text-sm font-medium text-gray-300 mb-2" data-lang-key="converter_quality_label">3. Pilih Kualitas Kompresi</label>
+                                <select id="quality-select" class="w-full appearance-none bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                                    <option value="18" data-lang-key="quality_high">Kualitas Tinggi (Ukuran Besar)</option>
+                                    <option value="23" data-lang-key="quality_medium">Sedang (Seimbang)</option>
+                                    <option value="28" data-lang-key="quality_low">Ringan (Ukuran Kecil)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Action Button -->
+                        <button id="convert-btn" disabled class="w-full flex items-center justify-center gap-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-300 disabled:bg-slate-600 disabled:cursor-not-allowed">
+                            <i class="ph-bold ph-gear-six text-xl"></i>
+                            <span data-lang-key="converter_start_btn">Mulai Convert</span>
+                        </button>
+
+                        <!-- Progress & Result Section -->
+                        <div id="progress-container" class="hidden space-y-3 pt-4 border-t border-white/10">
+                            <p id="progress-message" class="text-center text-gray-300"></p>
+                            <progress id="progress-bar" value="0" max="100" class="w-full"></progress>
+                            <pre id="log-output" class="w-full h-32 bg-slate-900/70 text-xs text-gray-400 p-2 rounded-lg overflow-y-auto custom-scrollbar"></pre>
+                        </div>
+                        
+                        <div id="result-container" class="hidden text-center pt-4 border-t border-white/10">
+                             <p class="text-lg text-emerald-400 mb-4" data-lang-key="converter_success">🎉 Konversi Selesai!</p>
+                             <a id="download-link" class="inline-flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300">
+                                <i class="ph-bold ph-download-simple text-xl"></i>
+                                <span data-lang-key="converter_download_btn">Download Hasil</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
             <main id="assets-view" class="main-view hidden flex-grow flex-col"><div class="mb-4 flex flex-col sm:flex-row gap-4"><div class="relative flex-grow"><input type="text" id="asset-search-input" data-lang-placeholder="asset_search_placeholder" class="w-full bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white focus:ring-2 focus:ring-teal-500 outline-none"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i></div></div><div id="assets-grid" class="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-y-auto custom-scrollbar pr-2"></div></main>
             <main id="invoice-view" class="main-view hidden flex-grow flex-col">
                 <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
@@ -187,7 +262,6 @@
         </div>
     </div>
 
-    <!-- PENAMBAHAN: Modal Edit Profil digabung -->
     <div id="edit-profile-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50">
         <div class="modal-panel glass-panel rounded-xl shadow-2xl p-6 w-full max-w-lg transform scale-95 opacity-0">
             <form id="edit-profile-form">
@@ -222,7 +296,7 @@
     <div id="comments-panel-overlay" class="fixed inset-0 bg-black bg-opacity-70 hidden z-40"></div>
     <div id="comments-panel" class="side-panel glass-panel fixed top-0 right-0 h-full w-full max-w-md shadow-2xl transform translate-x-full z-50 flex flex-col"><div class="flex justify-between items-center p-4 border-b border-white/10 flex-shrink-0"><h3 id="comments-task-title" class="text-lg font-bold text-white truncate pr-4">Komentar</h3><button id="close-comments-btn" class="p-2 text-gray-400 hover:text-white"><i class="ph-bold ph-x text-xl"></i></button></div><div id="comments-list" class="flex-grow p-4 overflow-y-auto custom-scrollbar"></div><div class="p-4 border-t border-white/10 flex-shrink-0"><form id="comment-form" class="flex gap-2"><input type="text" id="comment-input" class="w-full bg-slate-700/50 border border-white/10 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none" data-lang-placeholder="comment_placeholder" required><button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-lg flex items-center justify-center"><i class="ph-bold ph-paper-plane-tilt text-xl"></i></button></form></div></div>
     <div id="focus-bar" class="fixed bottom-0 left-0 right-0 glass-panel shadow-lg"><div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-2 grid grid-cols-2 md:grid-cols-3 items-center gap-4"><div class="flex items-center gap-3 justify-start"><i class="ph-bold ph-timer text-xl text-yellow-400"></i><span class="font-semibold text-white hidden sm:inline" data-lang-key="timer_title">Editor Focus</span><span id="timer-display" class="text-lg font-mono bg-slate-900/70 text-white px-2 py-0.5 rounded-md">30:00</span></div><div class="hidden md:flex flex-col items-center justify-center"><div class="w-full max-w-xs bg-slate-600/50 rounded-full h-2.5"><div id="timer-progress" class="bg-yellow-400 h-2.5 rounded-full" style="width: 100%;"></div></div></div><div class="flex items-center gap-4 justify-end">
-        <div class="text-xs text-gray-500 hidden lg:block">FocusCut Version 0.2</div>
+        <div class="text-xs text-gray-500 hidden lg:block">FocusCut Version 0.3</div>
         <div class="flex items-center gap-2"><button id="start-timer-btn" class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition-colors"><i class="ph-bold ph-play"></i></button><button id="pause-timer-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full transition-colors hidden"><i class="ph-bold ph-pause"></i></button><button id="reset-timer-btn" class="bg-red-600 hover:bg-red-700 text-white p-2 rounded-full transition-colors"><i class="ph-bold ph-arrow-counter-clockwise"></i></button></div></div></div></div>
 
     <script>
@@ -252,7 +326,9 @@
         let unsubscribeComments = null;
         let completedTasksChart = null;
         let artistDistributionChart = null;
-        let currentLanguage = 'id'; // Default language
+        let currentLanguage = 'id';
+        let ffmpegInstance = null;
+        let selectedFile = null;
 
         // --- ELEMEN UTAMA ---
         const loginScreen = document.getElementById('login-screen');
@@ -265,7 +341,7 @@
             id: {
                 login_prompt: 'Masuk untuk melanjutkan ke dasbor Anda.', login_button: 'Masuk dengan Google', logged_in_as: 'Login sebagai:',
                 change_bg_title: 'Ganti Latar Belakang', logout_title: 'Keluar', add_project_btn: 'Tambah Proyek', add_asset_btn: 'Tambah Aset',
-                nav_kanban: 'Papan Proyek', nav_assets: 'Bank Konten', nav_invoice: 'Invoice', nav_analytics: 'Analitik',
+                nav_kanban: 'Papan Proyek', nav_assets: 'Bank Konten', nav_invoice: 'Invoice', nav_analytics: 'Analitik', nav_converter: "Video Converter",
                 search_placeholder: 'Cari nama klien, proyek, atau tanggal (YYYY-MM-DD)...',
                 sort_date_desc: 'Urutkan: Tanggal (Terbaru)', sort_date_asc: 'Urutkan: Tanggal (Terlama)', sort_name_az: 'Urutkan: Nama Klien (A-Z)', sort_name_za: 'Urutkan: Nama Klien (Z-A)',
                 kanban_todo: 'List Konten', kanban_wip: 'Proses Editing', kanban_review: 'Review / Revisi', kanban_done: 'Selesai',
@@ -284,12 +360,15 @@
                 asset_gdrive_link: 'Link Google Drive', asset_shoot_date: 'Tanggal Syuting', asset_type: 'Jenis Aset', asset_type_raw: 'Footage Mentah', asset_type_final: 'Konten Final', asset_tags: 'Tags (pisahkan dengan koma)',
                 invoice_create_title: 'Buat Invoice', invoice_client_info: 'Informasi Klien', invoice_client_email: 'Email Klien', invoice_due_date: 'Tanggal Jatuh Tempo', invoice_items: 'Item Tagihan', invoice_add_item: '+ Tambah Item', invoice_payment_info: 'Informasi Pembayaran', invoice_bank_name: 'Nama Bank', invoice_account_name: 'Nama Pemilik Rekening', invoice_account_number: 'Nomor Rekening', invoice_save_bank_info: 'Simpan Info Bank', invoice_save_bank_info_title: 'Simpan Info Bank', invoice_export_pdf: 'Export PDF',
                 analytics_total_done: 'Total Proyek Selesai', analytics_this_month: 'Proyek Bulan Ini', analytics_avg_time: 'Rata-rata Waktu Pengerjaan', analytics_completed_weekly: 'Proyek Selesai per Minggu', analytics_client_dist: 'Distribusi Konten per Klien',
-                timer_title: 'Editor Focus', timer_done_title: 'Sesi Fokus Selesai!', timer_done_desc: 'Kerja bagus! Waktunya istirahat sejenak.', ok_btn: 'Oke'
+                timer_title: 'Editor Focus', timer_done_title: 'Sesi Fokus Selesai!', timer_done_desc: 'Kerja bagus! Waktunya istirahat sejenak.', ok_btn: 'Oke',
+                converter_title: "Video Converter & Compressor", converter_loading_engine: "Memuat mesin converter...", converter_upload_label: "1. Upload Video", converter_choose_file: "Pilih File Video",
+                converter_format_label: "2. Pilih Format Output", converter_quality_label: "3. Pilih Kualitas Kompresi", quality_high: "Kualitas Tinggi (Ukuran Besar)", quality_medium: "Sedang (Seimbang)",
+                quality_low: "Ringan (Ukuran Kecil)", converter_start_btn: "Mulai Convert", converter_success: "🎉 Konversi Selesai!", converter_download_btn: "Download Hasil", processing_video: "Memproses video, mohon tunggu..."
             },
             en: {
                 login_prompt: 'Sign in to continue to your dashboard.', login_button: 'Sign in with Google', logged_in_as: 'Logged in as:',
                 change_bg_title: 'Change Background', logout_title: 'Logout', add_project_btn: 'Add Project', add_asset_btn: 'Add Asset',
-                nav_kanban: 'Project Board', nav_assets: 'Content Bank', nav_invoice: 'Invoice', nav_analytics: 'Analytics',
+                nav_kanban: 'Project Board', nav_assets: 'Content Bank', nav_invoice: 'Invoice', nav_analytics: 'Analytics', nav_converter: "Video Converter",
                 search_placeholder: 'Search client name, project, or date (YYYY-MM-DD)...',
                 sort_date_desc: 'Sort by: Date (Newest)', sort_date_asc: 'Sort by: Date (Oldest)', sort_name_az: 'Sort by: Client Name (A-Z)', sort_name_za: 'Sort by: Client Name (Z-A)',
                 kanban_todo: 'Content List', kanban_wip: 'Editing Process', kanban_review: 'Review / Revision', kanban_done: 'Completed',
@@ -308,7 +387,10 @@
                 asset_gdrive_link: 'Google Drive Link', asset_shoot_date: 'Shoot Date', asset_type: 'Asset Type', asset_type_raw: 'Raw Footage', asset_type_final: 'Final Content', asset_tags: 'Tags (comma separated)',
                 invoice_create_title: 'Create Invoice', invoice_client_info: 'Client Information', invoice_client_email: 'Client Email', invoice_due_date: 'Due Date', invoice_items: 'Billable Items', invoice_add_item: '+ Add Item', invoice_payment_info: 'Payment Information', invoice_bank_name: 'Bank Name', invoice_account_name: 'Account Holder Name', invoice_account_number: 'Account Number', invoice_save_bank_info: 'Save Bank Info', invoice_save_bank_info_title: 'Save Bank Info', invoice_export_pdf: 'Export PDF',
                 analytics_total_done: 'Total Completed Projects', analytics_this_month: 'Projects This Month', analytics_avg_time: 'Average Completion Time', analytics_completed_weekly: 'Projects Completed per Week', analytics_client_dist: 'Content Distribution per Client',
-                timer_title: 'Editor Focus', timer_done_title: 'Focus Session Complete!', timer_done_desc: 'Great work! Time for a short break.', ok_btn: 'OK'
+                timer_title: 'Editor Focus', timer_done_title: 'Focus Session Complete!', timer_done_desc: 'Great work! Time for a short break.', ok_btn: 'OK',
+                converter_title: "Video Converter & Compressor", converter_loading_engine: "Loading converter engine...", converter_upload_label: "1. Upload Video", converter_choose_file: "Choose Video File",
+                converter_format_label: "2. Select Output Format", converter_quality_label: "3. Select Compression Quality", quality_high: "High Quality (Large File)", quality_medium: "Medium (Balanced)",
+                quality_low: "Light (Small File)", converter_start_btn: "Start Conversion", converter_success: "🎉 Conversion Complete!", converter_download_btn: "Download Result", processing_video: "Processing video, please wait..."
             }
         };
 
@@ -454,6 +536,7 @@
             setupProfilePicUpload(user, profileData);
             setupBgUpload(user);
             setupNavigation();
+            setupConverter();
             setupModals(user);
             setupKanbanInteractions(user, profileData);
             setupAssetInteractions();
@@ -467,7 +550,6 @@
             listenToTasks(user.uid);
             listenToAssets(user.uid);
 
-            // Terapkan bahasa ke elemen yang mungkin baru ditampilkan
             applyLanguage(currentLanguage);
         }
 
@@ -546,6 +628,120 @@
                 }
             });
         }
+
+        // --- FUNGSI VIDEO CONVERTER ---
+        async function setupConverter() {
+            const converterLoadingState = document.getElementById('converter-loading-state');
+            const converterUI = document.getElementById('converter-ui');
+            const uploadInput = document.getElementById('video-upload-input');
+            const uploadText = document.getElementById('file-upload-text');
+            const fileNameDisplay = document.getElementById('file-name-display');
+            const formatSelect = document.getElementById('format-select');
+            const qualitySelect = document.getElementById('quality-select');
+            const convertBtn = document.getElementById('convert-btn');
+            const progressContainer = document.getElementById('progress-container');
+            const progressBar = document.getElementById('progress-bar');
+            const progressMessage = document.getElementById('progress-message');
+            const logOutput = document.getElementById('log-output');
+            const resultContainer = document.getElementById('result-container');
+            const downloadLink = document.getElementById('download-link');
+
+            if (ffmpegInstance) {
+                converterLoadingState.classList.add('hidden');
+                converterUI.classList.remove('hidden');
+                return;
+            }
+
+            try {
+                const { createFFmpeg } = FFmpeg;
+                ffmpegInstance = createFFmpeg({
+                    log: true,
+                    corePath: 'https://unpkg.com/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js',
+                });
+                await ffmpegInstance.load();
+                converterLoadingState.classList.add('hidden');
+                converterUI.classList.remove('hidden');
+            } catch (error) {
+                console.error("Failed to load FFmpeg:", error);
+                converterLoadingState.innerHTML = `<p class="text-red-400">Gagal memuat converter. Coba refresh halaman.</p>`;
+                return;
+            }
+
+            uploadInput.addEventListener('change', (e) => {
+                selectedFile = e.target.files[0];
+                if (selectedFile) {
+                    fileNameDisplay.textContent = selectedFile.name;
+                    uploadText.textContent = selectedFile.name;
+                    convertBtn.disabled = false;
+                    resultContainer.classList.add('hidden');
+                    progressContainer.classList.add('hidden');
+                }
+            });
+
+            formatSelect.addEventListener('change', () => {
+                qualitySelect.parentElement.style.display = formatSelect.value === 'mp3' ? 'none' : 'block';
+            });
+
+            convertBtn.addEventListener('click', async () => {
+                if (!selectedFile || !ffmpegInstance) return;
+
+                convertBtn.disabled = true;
+                progressContainer.classList.remove('hidden');
+                resultContainer.classList.add('hidden');
+                logOutput.innerHTML = '';
+                progressBar.value = 0;
+
+                const outputFormat = formatSelect.value;
+                const qualityCRF = qualitySelect.value;
+                const inputFileName = selectedFile.name.replace(/[^a-zA-Z0-9.]/g, '_');
+                const outputFileName = `output.${outputFormat}`;
+
+                try {
+                    const { fetchFile } = FFmpeg;
+                    ffmpegInstance.FS('writeFile', inputFileName, await fetchFile(selectedFile));
+
+                    ffmpegInstance.setProgress(({ ratio }) => {
+                        progressBar.value = ratio * 100;
+                        progressMessage.textContent = `${translations[currentLanguage].processing_video} (${Math.round(ratio * 100)}%)`;
+                    });
+                    
+                    ffmpegInstance.setLogger(({ type, message }) => {
+                        logOutput.innerHTML += message + '\n';
+                        logOutput.scrollTop = logOutput.scrollHeight;
+                    });
+                    
+                    let command;
+                    if (outputFormat === 'mp3') {
+                        command = ['-i', inputFileName, '-q:a', '0', outputFileName];
+                    } else {
+                        command = ['-i', inputFileName, '-c:v', 'libx264', '-crf', qualityCRF, '-preset', 'fast', outputFileName];
+                    }
+
+                    await ffmpegInstance.run(...command);
+
+                    const data = ffmpegInstance.FS('readFile', outputFileName);
+
+                    const mimeTypeMap = { mp4: 'video/mp4', mov: 'video/quicktime', mp3: 'audio/mpeg' };
+                    const blob = new Blob([data.buffer], { type: mimeTypeMap[outputFormat] });
+                    const url = URL.createObjectURL(blob);
+
+                    downloadLink.href = url;
+                    downloadLink.download = `${selectedFile.name.split('.')[0]}_${qualityCRF}.${outputFormat}`;
+
+                    progressContainer.classList.add('hidden');
+                    resultContainer.classList.remove('hidden');
+                    ffmpegInstance.FS('unlink', inputFileName);
+                    ffmpegInstance.FS('unlink', outputFileName);
+
+                } catch (error) {
+                    console.error("FFmpeg conversion error:", error);
+                    progressMessage.textContent = "Konversi gagal! Cek konsol untuk detail.";
+                    progressMessage.classList.add('text-red-400');
+                } finally {
+                    convertBtn.disabled = false;
+                }
+            });
+        }
         
         // --- SEMUA FUNGSI ASLI DIKEMBALIKAN ---
         function setupTaskSearchAndSort() {
@@ -608,7 +804,7 @@
         function renderAllTasks(tasksToRender) {
             const columns = { todo: document.getElementById('todo-column'), wip: document.getElementById('wip-column'), review: document.getElementById('review-column'), done: document.getElementById('done-column') };
             const counts = { todo: 0, wip: 0, review: 0, done: 0 };
-            Object.values(columns).forEach(col => col.innerHTML = '');
+            Object.values(columns).forEach(col => { if(col) col.innerHTML = ''; });
             tasksToRender.forEach(task => {
                 if (columns[task.status]) {
                     const taskCard = document.createElement('div');
@@ -629,6 +825,7 @@
 
         function setupInvoiceGenerator(user, profileData) {
             const invoiceForm = document.getElementById('invoice-form');
+            if(!invoiceForm) return;
             const itemsContainer = document.getElementById('invoice-items-container');
             const addItemBtn = document.getElementById('add-invoice-item-btn');
             const previewContainer = document.getElementById('invoice-preview');
@@ -789,6 +986,7 @@
         }
         function setupAssetInteractions() {
             const assetsGrid = document.getElementById('assets-grid');
+            if(!assetsGrid) return;
             assetsGrid.addEventListener('click', e => {
                 const deleteBtn = e.target.closest('.delete-asset-btn');
                 if (deleteBtn) { e.preventDefault(); const assetId = deleteBtn.dataset.id; const assetName = allAssetsCache.find(a => a.id === assetId)?.clientName || 'aset ini'; openDeleteConfirmation(assetId, assetName, 'asset'); }
@@ -812,6 +1010,7 @@
         
         function renderAllAssets(assetsToRender) {
             const grid = document.getElementById('assets-grid');
+            if(!grid) return;
             grid.innerHTML = '';
             if (assetsToRender.length === 0) {
                 grid.innerHTML = `<p class="text-center text-gray-400 col-span-full mt-8">Aset tidak ditemukan.</p>`;
@@ -835,6 +1034,8 @@
         }
 
         function updateAnalytics(tasks) {
+            const analyticsView = document.getElementById('analytics-view');
+            if(!analyticsView || !analyticsView.offsetParent) return; // Don't run if not visible
             const doneTasks = tasks.filter(task => task.status === 'done' && task.completedAt);
             const now = new Date();
             document.getElementById('analytics-total-done').textContent = doneTasks.length;
